@@ -9,7 +9,11 @@ public class CameraFollow : MonoBehaviour {
     public Transform leftBounds;
     public Transform rightBounds;
 
-    private float camWidth, camHeight, levelMinX, levelMaX;
+    public float smoothDampTime = 0.15f;
+    //ref to current vector velocity note: Y U DO THIS?!
+    private float smoothDampVelocity = Vector3.zero;
+
+    private float camWidth, camHeight, levelMinX, levelMaxX;
     // Use this for initialization
     void Start ()
     {
@@ -20,7 +24,7 @@ public class CameraFollow : MonoBehaviour {
         float RightBoundsWidth = rightBounds.GetComponentInChildren<SpriteRenderer>().bounds.size.x / 2;
 
         levelMinX = leftBounds.position.x + leftBoundsWidth + (camWidth / 2);
-        levelMaX = rightBounds.position.x - RightBoundsWidth - (camWidth / 2);
+        levelMaxX = rightBounds.position.x - RightBoundsWidth - (camWidth / 2);
     }
 	
 	// Update is called once per frame
@@ -28,8 +32,11 @@ public class CameraFollow : MonoBehaviour {
     {
         if (target)
         {
-            float targetX = Mathf.Max(levelMinX, Mathf.Min(levelMaX, target.position.x));
+            float targetX = Mathf.Max(levelMinX, Mathf.Min(levelMaxX, target.position.x));
+            // So that the camera follows the player smoothly
+            float x = Mathf.SmoothDamp(transform.position.x, targetX, ref smoothDampVelocity, smoothDampTime);
 
+            transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }	
 	}
 }
