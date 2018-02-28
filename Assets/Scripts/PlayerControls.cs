@@ -41,8 +41,7 @@ public class PlayerControls : MonoBehaviour
                 physObj.velocity.y = physObj.velocity.y * 0.5f;
             }
         }
-        if (physObj.grounded) grounds = 0;
-        if (!physObj.grounded) grounds += 1;
-        if (grounds == 1 || physObj.velocity.y > 0 && !physObj.jumped && !physObj.grounded) physObj.Move(new Vector2(0, 8f * Time.deltaTime * -1f), true);
+        RaycastHit2D[] res = new RaycastHit2D[16];
+        int hit = Physics2D.Raycast(transform.position, Vector3.down, physObj.contactFilter, res ,transform.localScale.y / 2 + physObj.skinDist);
     }
 }

@@ -11,8 +11,8 @@ public class PhysicsObject : MonoBehaviour
     protected Vector2 groundNormal;
     public Vector2 velocity;
     protected Rigidbody2D rb2d;
-    protected const float minMoveDistance = 0.001f, skinDist = 0.05f;
-    protected ContactFilter2D contactFilter;
+    public float minMoveDistance = 0.001f, skinDist = 0.05f;
+    public ContactFilter2D contactFilter;
     protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
     protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D>(16);
 
@@ -63,7 +63,7 @@ public class PhysicsObject : MonoBehaviour
             {
                 hitBufferList.Add(hitBuffer[i]);
             }
-            if (hitBufferList.Count == 0 && yMove)
+            if (hitBufferList.Count == 0 && yMove||jumped)
             {
                 groundNormal = new Vector2(0, 1);
             }
@@ -102,6 +102,6 @@ public class PhysicsObject : MonoBehaviour
             }
         }
 
-        rb2d.position = rb2d.position + move.normalized * distance;
+        rb2d.position = (Vector2)rb2d.position + move.normalized * distance;
     }
 }
