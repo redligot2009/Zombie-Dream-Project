@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhysicsObject : MonoBehaviour {
+public class PhysicsObject : MonoBehaviour
+{
 
     public float gravityModifier = 1f;
     public float minGroundNormalY = 0.35f;
-    public bool grounded = false, leftwall = false, rightwall = true;
+    public bool grounded = false, leftwall = false, rightwall = true, jumped = false;
     protected Vector2 groundNormal;
     public Vector2 velocity;
     protected Rigidbody2D rb2d;
@@ -20,14 +21,16 @@ public class PhysicsObject : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
     }
 
-    void Start () {
+    void Start()
+    {
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         contactFilter.useLayerMask = true;
-	}
-	
-	void Update () {
-	}
+    }
+
+    void Update()
+    {
+    }
 
     void FixedUpdate()
     {
@@ -45,32 +48,32 @@ public class PhysicsObject : MonoBehaviour {
 
         move = Vector2.up * deltaPos.y;
 
-        Move(move,true);
+        Move(move, true);
     }
 
-    void Move(Vector2 move, bool yMove)
+    public void Move(Vector2 move, bool yMove)
     {
         float distance = move.magnitude;
 
-        if(distance > minMoveDistance)
+        if (distance > minMoveDistance)
         {
-            int count = rb2d.Cast(move, contactFilter, hitBuffer,distance+skinDist);
+            int count = rb2d.Cast(move, contactFilter, hitBuffer, distance + skinDist);
             hitBufferList.Clear();
-            for(int i = 0; i < count; i ++)
+            for (int i = 0; i < count; i++)
             {
                 hitBufferList.Add(hitBuffer[i]);
             }
-            if(hitBufferList.Count == 0 && yMove)
+            if (hitBufferList.Count == 0 && yMove)
             {
                 groundNormal = new Vector2(0, 1);
             }
-            for(int i = 0; i < hitBufferList.Count; i++)
+            for (int i = 0; i < hitBufferList.Count; i++)
             {
                 Vector2 currNormal = hitBufferList[i].normal;
-                if(currNormal.y > minGroundNormalY)
+                if (currNormal.y > minGroundNormalY)
                 {
                     grounded = true;
-                    if(yMove)
+                    if (yMove)
                     {
                         groundNormal = currNormal;
                         currNormal.x = 0;
@@ -78,19 +81,19 @@ public class PhysicsObject : MonoBehaviour {
                 }
                 else
                 {
-                    if(move.x < 0)
+                    if (move.x < 0)
                     {
                         leftwall = true;
                         //Debug.Log("leftwall");
                     }
-                    else if(move.x > 0)
+                    else if (move.x > 0)
                     {
                         rightwall = true;
                         //Debug.Log("rightwall");
                     }
                 }
                 float projection = Vector2.Dot(velocity, currNormal);
-                if(projection < 0)
+                if (projection < 0)
                 {
                     velocity = velocity - projection * currNormal;
                 }
