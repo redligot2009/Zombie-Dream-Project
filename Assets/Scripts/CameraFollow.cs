@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour {
     public Transform rightBounds;
 
     public float smoothDampTime = 0.15f;
-    //ref to current vector velocity note: Y U DO THIS?!
+   
     private float smoothDampVelocity = Vector3.zero;
 
     private float camWidth, camHeight, levelMinX, levelMaxX;
