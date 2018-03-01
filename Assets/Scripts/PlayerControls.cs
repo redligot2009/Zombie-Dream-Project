@@ -12,7 +12,6 @@ public class PlayerControls : MonoBehaviour
     {
         physObj = GetComponent<PhysicsObject>();
     }
-    int grounds = 0;
     void Update()
     {
 
@@ -41,7 +40,5 @@ public class PlayerControls : MonoBehaviour
                 physObj.velocity.y = physObj.velocity.y * 0.5f;
             }
         }
-        RaycastHit2D[] res = new RaycastHit2D[16];
-        int hit = Physics2D.Raycast(transform.position, Vector3.down, physObj.contactFilter, res ,transform.localScale.y / 2 + physObj.skinDist);
     }
 }

@@ -802,6 +802,22 @@ MonoBehaviour:
   rightwall: 1
   jumped: 0
   velocity: {x: 0, y: 0}
+  minMoveDistance: 0.001
+  skinDist: 0.05
+  contactFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!114 &905070446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -814,7 +830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSpeed: 10
-  moveSpeed: 8
+  moveSpeed: 5
 --- !u!70 &905070447
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

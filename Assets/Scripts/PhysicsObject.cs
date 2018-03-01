@@ -13,7 +13,7 @@ public class PhysicsObject : MonoBehaviour
     protected Rigidbody2D rb2d;
     public float minMoveDistance = 0.001f, skinDist = 0.05f;
     public ContactFilter2D contactFilter;
-    protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
+    protected RaycastHit2D[] hitBuffer = new RaycastHit2D[1];
     protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D>(16);
 
     private void OnEnable()
@@ -31,7 +31,7 @@ public class PhysicsObject : MonoBehaviour
     void Update()
     {
     }
-
+    int grounds = 0;
     void FixedUpdate()
     {
         velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
@@ -49,6 +49,9 @@ public class PhysicsObject : MonoBehaviour
         move = Vector2.up * deltaPos.y;
 
         Move(move, true);
+        if (grounded) grounds = 0;
+        if (grounded) grounds += 1;
+        if (grounds == 1 ) Move(new Vector2(0, 2f * Time.deltaTime * -1f), true);
     }
 
     public void Move(Vector2 move, bool yMove)
@@ -77,6 +80,11 @@ public class PhysicsObject : MonoBehaviour
                     {
                         groundNormal = currNormal;
                         currNormal.x = 0;
+                    }
+                    else
+                    {
+                        groundNormal = currNormal;
+                        currNormal.y = 0;
                     }
                 }
                 else
