@@ -12,7 +12,6 @@ public class PlayerControls : MonoBehaviour
     {
         physObj = GetComponent<PhysicsObject>();
     }
-    int grounds = 0;
     void Update()
     {
 
@@ -38,11 +37,8 @@ public class PlayerControls : MonoBehaviour
         {
             if (physObj.velocity.y > 0)
             {
-                physObj.velocity.y = physObj.velocity.y * 0.5f;
+                physObj.velocity.y = physObj.velocity.y * 0.75f;
             }
         }
-        if (physObj.grounded) grounds = 0;
-        if (!physObj.grounded) grounds += 1;
-        if (grounds == 1 || physObj.velocity.y > 0 && !physObj.jumped && !physObj.grounded) physObj.Move(new Vector2(0, 8f * Time.deltaTime * -1f), true);
     }
 }

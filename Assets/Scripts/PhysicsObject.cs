@@ -11,9 +11,9 @@ public class PhysicsObject : MonoBehaviour
     protected Vector2 groundNormal;
     public Vector2 velocity;
     protected Rigidbody2D rb2d;
-    protected const float minMoveDistance = 0.001f, skinDist = 0.05f;
-    protected ContactFilter2D contactFilter;
-    protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
+    public float minMoveDistance = 0.001f, skinDist = 0.05f;
+    public ContactFilter2D contactFilter;
+    protected RaycastHit2D[] hitBuffer = new RaycastHit2D[1];
     protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D>(16);
 
     private void OnEnable()
@@ -31,7 +31,7 @@ public class PhysicsObject : MonoBehaviour
     void Update()
     {
     }
-
+    int grounds = 0;
     void FixedUpdate()
     {
         velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
@@ -49,6 +49,9 @@ public class PhysicsObject : MonoBehaviour
         move = Vector2.up * deltaPos.y;
 
         Move(move, true);
+        if (grounded) grounds = 0;
+        if (!grounded) grounds += 1;
+        if (grounds == 1) Move(new Vector2(0, Time.deltaTime * -4f), true);
     }
 
     public void Move(Vector2 move, bool yMove)
@@ -63,7 +66,7 @@ public class PhysicsObject : MonoBehaviour
             {
                 hitBufferList.Add(hitBuffer[i]);
             }
-            if (hitBufferList.Count == 0 && yMove)
+            if (hitBufferList.Count == 0 && yMove||jumped)
             {
                 groundNormal = new Vector2(0, 1);
             }
@@ -77,6 +80,11 @@ public class PhysicsObject : MonoBehaviour
                     {
                         groundNormal = currNormal;
                         currNormal.x = 0;
+                    }
+                    else
+                    {
+                        groundNormal = currNormal;
+                        currNormal.y = 0;
                     }
                 }
                 else
@@ -102,6 +110,6 @@ public class PhysicsObject : MonoBehaviour
             }
         }
 
-        rb2d.position = rb2d.position + move.normalized * distance;
+        rb2d.position = (Vector2)rb2d.position + move.normalized * distance;
     }
 }
