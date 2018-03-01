@@ -5,39 +5,39 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour
 {
 
-    PhysicsObject physObj;
+    PhysicsObject po;
     public float jumpSpeed = 8f, moveSpeed = 8f;
 
     void Start()
     {
-        physObj = GetComponent<PhysicsObject>();
+        po = GetComponent<PhysicsObject>();
     }
     void Update()
     {
 
-        if (Input.GetKey(KeyCode.A) && !physObj.leftwall)
+        if (Input.GetKey(KeyCode.A) && !po.leftwall)
         {
-            physObj.velocity.x = Mathf.Lerp(physObj.velocity.x, -moveSpeed, Time.deltaTime * 5f);
+            po.velocity.x = Mathf.Lerp(po.velocity.x, -moveSpeed, Time.deltaTime * 5f);
         }
-        else if (Input.GetKey(KeyCode.D) && !physObj.rightwall)
+        else if (Input.GetKey(KeyCode.D) && !po.rightwall)
         {
-            physObj.velocity.x = Mathf.Lerp(physObj.velocity.x, moveSpeed, Time.deltaTime * 5f);
+            po.velocity.x = Mathf.Lerp(po.velocity.x, moveSpeed, Time.deltaTime * 5f);
         }
         else
         {
-            physObj.velocity.x = Mathf.Lerp(physObj.velocity.x, 0f, Time.deltaTime * 10f);
+            po.velocity.x = Mathf.Lerp(po.velocity.x, 0f, Time.deltaTime * 10f);
         }
-        if (physObj.grounded && !Input.GetKey(KeyCode.Space)) physObj.jumped = false;
-        else if (Input.GetKey(KeyCode.Space) && physObj.grounded)
+        if (po.grounded && !Input.GetKey(KeyCode.Space)) po.jumped = false;
+        else if (Input.GetKey(KeyCode.Space) && po.grounded)
         {
-            physObj.jumped = true;
-            physObj.velocity.y = jumpSpeed;
+            po.jumped = true;
+            po.velocity.y = jumpSpeed;
         }
         else if (Input.GetKeyUp(KeyCode.Space))
         {
-            if (physObj.velocity.y > 0)
+            if (po.velocity.y > 0)
             {
-                physObj.velocity.y = physObj.velocity.y * 0.75f;
+                po.velocity.y = po.velocity.y * 0.75f;
             }
         }
     }
