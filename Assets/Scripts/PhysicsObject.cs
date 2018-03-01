@@ -51,7 +51,12 @@ public class PhysicsObject : MonoBehaviour
         Move(move, true);
         if (grounded) grounds = 0;
         if (!grounded) grounds += 1;
-        if (grounds == 1) Move(new Vector2(0, Time.deltaTime * -4f), true);
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x + (deltaPos.x < 0 ? 1 : -1) * ((transform.localScale.x/2f) - 2*skinDist),transform.position.y), Vector2.down, transform.localScale.y/2f + 4*skinDist,LayerMask.GetMask("ground"));
+        if (grounds == 1 && hit.collider != null)
+        {
+            //Debug.Log(hit.collider.gameObject.name);
+            Move(new Vector2(0, Time.deltaTime * -4f), true);
+        }
     }
 
     public void Move(Vector2 move, bool yMove)
