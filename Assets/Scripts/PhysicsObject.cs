@@ -51,7 +51,7 @@ public class PhysicsObject : MonoBehaviour
         Move(move, true);
         if (grounded) grounds = 0;
         if (grounded) grounds += 1;
-        if (grounds == 1 ) Move(new Vector2(0, 2f * Time.deltaTime * -1f), true);
+        if (grounds == 1) Move(new Vector2(0, Time.deltaTime * -4f), true);
     }
 
     public void Move(Vector2 move, bool yMove)

@@ -37,7 +37,7 @@ public class PlayerControls : MonoBehaviour
         {
             if (physObj.velocity.y > 0)
             {
-                physObj.velocity.y = physObj.velocity.y * 0.5f;
+                physObj.velocity.y = physObj.velocity.y * 0.75f;
             }
         }
     }
