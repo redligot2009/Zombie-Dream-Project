@@ -83,7 +83,6 @@ public class PhysicsObject : MonoBehaviour
                     }
                     else
                     {
-                        groundNormal = currNormal;
                         currNormal.y = 0;
                     }
                 }
