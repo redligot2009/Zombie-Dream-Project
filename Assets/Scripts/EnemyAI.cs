@@ -27,9 +27,13 @@ public class EnemyAI : MonoBehaviour
     {
         if (state != EnemyState.dead)
         {
+            if (po.collisions.below || po.collisions.above)
+            {
+                po.velocity.y = 0;
+            }
             Vector3 pos = transform.localPosition;
             Vector3 scale = transform.localScale;
-            if(po.grounded) state = EnemyState.walking;
+            if(po.collisions.below) state = EnemyState.walking;
             if (state == EnemyState.falling)
             {
             }
@@ -46,9 +50,11 @@ public class EnemyAI : MonoBehaviour
                     scale.x = 1;
                 }
             }
-            if (po.leftwall) dirx = 1;
-            else if (po.rightwall) dirx = -1;
-
+            if (po.collisions.left) dirx = 1;
+            else if (po.collisions.right) dirx = -1;
+            //physics shit
+            po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;
+            po.Move(po.velocity * Time.deltaTime);
         }
     }
 }

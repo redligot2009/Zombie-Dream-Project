@@ -754,7 +754,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 832708238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.4, y: 5.4, z: 0}
+  m_LocalPosition: {x: -3.77, y: 6.13, z: 0}
   m_LocalScale: {x: 2.493224, y: 2.4948797, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -868,7 +868,6 @@ GameObject:
   - component: {fileID: 905070442}
   - component: {fileID: 905070440}
   - component: {fileID: 905070444}
-  - component: {fileID: 905070441}
   - component: {fileID: 905070445}
   - component: {fileID: 905070446}
   - component: {fileID: 905070447}
@@ -913,26 +912,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!50 &905070441
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 905070439}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 1
-  m_SleepingMode: 0
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!33 &905070442
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -990,28 +969,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityModifier: 1.5
-  minGroundNormalY: 0.65
-  grounded: 0
-  leftwall: 0
-  rightwall: 1
-  jumped: 0
   velocity: {x: 0, y: 0}
-  minMoveDistance: 0.001
+  coll: {fileID: 0}
+  maxClimbAngle: 80
+  maxDescendAngle: 80
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 512
   skinDist: 0.05
-  contactFilter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
+  horizontalRayCount: 8
+  verticalRayCount: 8
 --- !u!114 &905070446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1422,7 +1389,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1370465629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.85, y: 1.17, z: 0}
+  m_LocalPosition: {x: 5.85, y: 0.76, z: 0}
   m_LocalScale: {x: 7.631266, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1441,7 +1408,6 @@ GameObject:
   - component: {fileID: 1425677371}
   - component: {fileID: 1425677376}
   - component: {fileID: 1425677375}
-  - component: {fileID: 1425677377}
   m_Layer: 10
   m_Name: enemy
   m_TagString: Untagged
@@ -1553,48 +1519,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityModifier: 1
-  minGroundNormalY: 0.35
-  grounded: 0
-  leftwall: 0
-  rightwall: 1
-  jumped: 0
   velocity: {x: 0, y: 0}
-  minMoveDistance: 0.001
+  coll: {fileID: 0}
+  maxClimbAngle: 80
+  maxDescendAngle: 80
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 512
   skinDist: 0.05
-  contactFilter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 512
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
---- !u!50 &1425677377
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1425677370}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 1
-  m_SleepingMode: 0
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  horizontalRayCount: 4
+  verticalRayCount: 4
 --- !u!1 &1567044773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1880,7 +1814,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1747967588}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.17, y: 4.77, z: 0}
+  m_LocalPosition: {x: -6.17, y: 4.5, z: 0}
   m_LocalScale: {x: 7.631266, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2173,7 +2107,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1978025620}
   m_LocalRotation: {x: -0, y: -0, z: 0.45381132, w: 0.89109784}
-  m_LocalPosition: {x: 0.4, y: 3.92, z: 0}
+  m_LocalPosition: {x: 0.4, y: 3.51, z: 0}
   m_LocalScale: {x: 3.3809268, y: 6.4373837, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
