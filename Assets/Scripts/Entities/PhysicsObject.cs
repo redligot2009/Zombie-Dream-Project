@@ -8,6 +8,7 @@ public class PhysicsObject : MonoBehaviour
     public Vector2 velocity;
 
     /*box collider*/
+    [HideInInspector]
     public BoxCollider2D coll;
 
     /*slope stuff*/
@@ -86,17 +87,18 @@ public class PhysicsObject : MonoBehaviour
                     velocity.x += distanceToSlopeStart * directionX;
                 }
                 //check if wall height is too small
-                float wallHeight = hit.collider.bounds.max.y - rayOrigin.y;
+                float wallHeight = Mathf.Abs(raycastOrigins.bottomLeft.y - hit.collider.bounds.max.y);
                 if (wallHeight >= hopThreshold && (!collisions.climbingSlope && slopeAngle > maxClimbAngle || slopeAngle > maxClimbAngle))
                 {
                     velocity.x = (hit.distance - skinDist) * directionX;
                     rayLength = hit.distance;
-
+                    /*stop bouncing up when pressed against 
+                    * wall while on slope
+                    */
                     if (collisions.climbingSlope)
                     {
                         velocity.y = Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(velocity.x);
                     }
-
                     collisions.left = directionX == -1;
                     collisions.right = directionX == 1;
                 }
@@ -122,6 +124,9 @@ public class PhysicsObject : MonoBehaviour
                 velocity.y = (hit.distance - skinDist) * directionY;
                 rayLength = hit.distance;
 
+                /*stop bouncing up when pressed against 
+                * ceiling while on slope
+                */
                 if (collisions.climbingSlope)
                 {
                     velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);
@@ -194,11 +199,8 @@ public class PhysicsObject : MonoBehaviour
     void DescendSlope(ref Vector2 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
-        /* if dirx = -1 then start from bottomright
-         * otherwise start from bottomleft.
-         */
+        //set ray origin according to direction
         Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
-        /* Cast ray down until infinity */
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, Mathf.Infinity, collisionMask);
 
         if (hit)
@@ -223,6 +225,7 @@ public class PhysicsObject : MonoBehaviour
             }
         }
     }
+
 
     /*
      * Finds new bottomleft, bottomright,

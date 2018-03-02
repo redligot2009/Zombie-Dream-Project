@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class GoombaAI : MonoBehaviour
 {
     public int dirx = -1;
 
