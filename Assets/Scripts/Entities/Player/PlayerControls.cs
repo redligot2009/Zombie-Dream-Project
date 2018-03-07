@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DragonBones;
 
 public class PlayerControls : MonoBehaviour
 {
 
     PhysicsObject po;
     public float jumpSpeed = 8f, moveSpeed = 8f;
+    UnityArmatureComponent anim;
 
     void Start()
     {
         po = GetComponent<PhysicsObject>();
+        anim = GameObject.Find("animation").GetComponent<UnityArmatureComponent>();
     }
 
     void Update()
@@ -39,8 +42,16 @@ public class PlayerControls : MonoBehaviour
         {
             if (po.velocity.y > 0)
             {
-                po.velocity.y = po.velocity.y * 0.5f;
+                po.velocity.y = po.velocity.y * 0.65f;
             }
+        }
+        if(po.velocity.x >= 0)
+        {
+            anim.armature.flipX = false;
+        }
+        else
+        {
+            anim.armature.flipX = true;
         }
         //physics shit
         po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;
