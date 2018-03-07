@@ -13,7 +13,7 @@ public class PlayerControls : MonoBehaviour
     void Start()
     {
         po = GetComponent<PhysicsObject>();
-        anim = GameObject.Find("animation").GetComponent<UnityArmatureComponent>();
+        anim = GameObject.Find("tang").GetComponent<UnityArmatureComponent>();
     }
 
     void Update()
@@ -52,6 +52,16 @@ public class PlayerControls : MonoBehaviour
         else
         {
             anim.armature.flipX = true;
+        }
+        if(Mathf.Abs(po.velocity.x) > 0.5f)
+        {
+            if(anim.animation.lastAnimationName != "run")
+                anim.animation.FadeIn("run",0.1f,-1,0);
+        }
+        else
+        {
+            if (anim.animation.lastAnimationName != "idle")
+                anim.animation.FadeIn("idle", 0.1f, -1, 0);
         }
         //physics shit
         po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;
