@@ -8,13 +8,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f6e8578ff48d92438850b3e6630cd5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 822638aad876db2438f95e3793e37725, type: 3}
   m_Name: Player_Data
   m_EditorClassIdentifier: 
   dataName: Player
-  dragonBonesJSON: {fileID: 4900000, guid: bcbd0e84958929e42b7adaf6317ebb22, type: 3}
+  dragonBonesJSON: {fileID: 4900000, guid: ad4d7276488b2a943bbb8c61726298ad, type: 3}
   textureAtlas:
-  - textureAtlasJSON: {fileID: 4900000, guid: 7fb25d48e996486489457ea8135be162, type: 3}
-    texture: {fileID: 2800000, guid: a488d7a282cdcd44897bfc2407a9a180, type: 3}
-    material: {fileID: 2100000, guid: f68e3c22a21abd549a74e879f33bc8f6, type: 2}
+  - textureAtlasJSON: {fileID: 4900000, guid: b139d76e41d76df4cb2cbeebe78b8976, type: 3}
+    texture: {fileID: 2800000, guid: ac9e94792c1838b49a6e711142d7c5cb, type: 3}
+    material: {fileID: 2100000, guid: 380c4053680c3dc4585f51e5ac18bb4c, type: 2}
     uiMaterial: {fileID: 0}
