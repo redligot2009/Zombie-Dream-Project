@@ -8,14 +8,14 @@ public class PlayerControls : MonoBehaviour
 
     PhysicsObject po;
     public float jumpSpeed = 8f, moveSpeed = 8f;
-    UnityEngine.Transform anim;
-    //UnityArmatureComponent anim;
+    //UnityEngine.Transform anim;
+    UnityArmatureComponent anim;
 
     void Start()
     {
         po = GetComponent<PhysicsObject>();
-        anim = GameObject.Find("anim").GetComponent<UnityEngine.Transform>();
-        //anim = GameObject.Find("tang").GetComponent<UnityArmatureComponent>();
+        //anim = GameObject.Find("anim").GetComponent<UnityEngine.Transform>();
+        anim = GameObject.Find("anim").GetComponent<UnityArmatureComponent>();
     }
 
     void Update()
@@ -47,15 +47,15 @@ public class PlayerControls : MonoBehaviour
                 po.velocity.y = po.velocity.y * 0.65f;
             }
         }
-        if(po.velocity.x > 0)
+        /*if(po.velocity.x > 0)
         {
             anim.eulerAngles = new Vector3(0, 0, 0);
         }
         else if(po.velocity.x < 0)
         {
             anim.eulerAngles = new Vector3(0, 180, 0);
-        }
-        /*if(po.velocity.x >= 0)
+        }*/
+        if(po.velocity.x >= 0)
         {
             anim.armature.flipX = false;
         }
@@ -63,7 +63,7 @@ public class PlayerControls : MonoBehaviour
         {
             anim.armature.flipX = true;
         }
-        if(Mathf.Abs(po.velocity.x) > 0.5f)
+        /*if(Mathf.Abs(po.velocity.x) > 0.5f)
         {
             if(anim.animation.lastAnimationName != "run")
                 anim.animation.FadeIn("run",0.1f,-1,0);
