@@ -725,6 +725,8 @@ GameObject:
   - component: {fileID: 1724492020}
   - component: {fileID: 1724492019}
   - component: {fileID: 1724492021}
+  - component: {fileID: 1724492023}
+  - component: {fileID: 1724492022}
   m_Layer: 9
   m_Name: road
   m_TagString: Untagged
@@ -3378,8 +3380,170 @@ TilemapCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
+  m_UsedByComposite: 1
+  m_Offset: {x: 0, y: 0}
+--- !u!66 &1724492022
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1724492017}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 1724492021}
+    m_ColliderPaths:
+    - - X: 510000000
+        Y: -60000000
+      - X: 600000000
+        Y: -60000000
+      - X: 600000000
+        Y: 70000000
+      - X: 560000000
+        Y: 70000000
+      - X: 560000000
+        Y: -40000000
+      - X: 470000000
+        Y: -40000000
+      - X: 470000000
+        Y: -100000000
+      - X: 510000000
+        Y: -100000000
+    - - X: 90000000
+        Y: -40000000
+      - X: -10000000
+        Y: -40000000
+      - X: -10000000
+        Y: -20000000
+      - X: -30000000
+        Y: -20000000
+      - X: -30000000
+        Y: -40000000
+      - X: -110000000
+        Y: -40000000
+      - X: -110000000
+        Y: 60000000
+      - X: -130000000
+        Y: 60000000
+      - X: -130000000
+        Y: -60000000
+      - X: 50000000
+        Y: -60000000
+      - X: 50000000
+        Y: -100000000
+      - X: 90000000
+        Y: -100000000
+    - - X: 160000000
+        Y: -60000000
+      - X: 310000000
+        Y: -60000000
+      - X: 310000000
+        Y: -100000000
+      - X: 340000000
+        Y: -100000000
+      - X: 340000000
+        Y: -40000000
+      - X: 300000000
+        Y: -40000000
+      - X: 300000000
+        Y: -30000000
+      - X: 280000000
+        Y: -30000000
+      - X: 280000000
+        Y: -40000000
+      - X: 160000000
+        Y: -40000000
+      - X: 160000000
+        Y: -30000000
+      - X: 140000000
+        Y: -30000000
+      - X: 140000000
+        Y: -40000000
+      - X: 120000000
+        Y: -40000000
+      - X: 120000000
+        Y: -100000000
+      - X: 160000000
+        Y: -100000000
+    - - X: 420000000
+        Y: -40000000
+      - X: 380000000
+        Y: -40000000
+      - X: 380000000
+        Y: -100000000
+      - X: 420000000
+        Y: -100000000
+  m_CompositePaths:
+    m_Paths:
+    - - {x: 51, y: -6}
+      - {x: 60, y: -6}
+      - {x: 60, y: 7}
+      - {x: 56, y: 7}
+      - {x: 56, y: -4}
+      - {x: 47, y: -4}
+      - {x: 47, y: -10}
+      - {x: 51, y: -10}
+    - - {x: 9, y: -4}
+      - {x: -1, y: -4}
+      - {x: -1, y: -2}
+      - {x: -3, y: -2}
+      - {x: -3, y: -4}
+      - {x: -11, y: -4}
+      - {x: -11, y: 6}
+      - {x: -13, y: 6}
+      - {x: -13, y: -6}
+      - {x: 5, y: -6}
+      - {x: 5, y: -10}
+      - {x: 9, y: -10}
+    - - {x: 16, y: -6}
+      - {x: 31, y: -6}
+      - {x: 31, y: -10}
+      - {x: 34, y: -10}
+      - {x: 34, y: -4}
+      - {x: 30, y: -4}
+      - {x: 30, y: -3}
+      - {x: 28, y: -3}
+      - {x: 28, y: -4}
+      - {x: 16, y: -4}
+      - {x: 16, y: -3}
+      - {x: 14, y: -3}
+      - {x: 14, y: -4}
+      - {x: 12, y: -4}
+      - {x: 12, y: -10}
+      - {x: 16, y: -10}
+    - - {x: 42, y: -4}
+      - {x: 38, y: -4}
+      - {x: 38, y: -10}
+      - {x: 42, y: -10}
+  m_VertexDistance: 0.0005
+--- !u!50 &1724492023
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1724492017}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1797216165
 GameObject:
   m_ObjectHideFlags: 0
