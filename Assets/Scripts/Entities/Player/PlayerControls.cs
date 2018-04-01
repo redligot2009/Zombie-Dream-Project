@@ -63,7 +63,7 @@ public class PlayerControls : MonoBehaviour
         {
             anim.armature.flipX = true;
         }
-        /*if(Mathf.Abs(po.velocity.x) > 0.5f)
+        if(Mathf.Abs(po.velocity.x) > 0.5f)
         {
             if(anim.animation.lastAnimationName != "run")
                 anim.animation.FadeIn("run",0.1f,-1,0);
@@ -72,7 +72,7 @@ public class PlayerControls : MonoBehaviour
         {
             if (anim.animation.lastAnimationName != "idle")
                 anim.animation.FadeIn("idle", 0.1f, -1, 0);
-        }*/
+        }
         //physics shit
         po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;
         po.Move(po.velocity * Time.deltaTime);
