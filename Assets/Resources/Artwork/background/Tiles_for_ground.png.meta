@@ -1,38 +1,38 @@
 fileFormatVersion: 2
 guid: c2dfc61f68c2d4a48af9c4e5d488eb3c
-timeCreated: 1522487529
+timeCreated: 1522567558
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Tiles_for_ground_0
-    21300002: Tiles_for_ground_1
+    21300000: solo
+    21300002: solobg
     21300004: Tiles_for_ground_2
     21300006: Tiles_for_ground_3
     21300008: Tiles_for_ground_4
-    21300010: Tiles_for_ground_5
-    21300012: Tiles_for_ground_6
-    21300014: Tiles_for_ground_7
+    21300010: topright
+    21300012: topmiddle
+    21300014: topleft
     21300016: Tiles_for_ground_8
     21300018: Tiles_for_ground_9
     21300020: Tiles_for_ground_10
     21300022: Tiles_for_ground_11
     21300024: Tiles_for_ground_12
-    21300026: Tiles_for_ground_13
-    21300028: Tiles_for_ground_14
-    21300030: Tiles_for_ground_15
+    21300026: middleleft
+    21300028: middlemiddle
+    21300030: middleright
     21300032: Tiles_for_ground_16
     21300034: Tiles_for_ground_17
     21300036: Tiles_for_ground_18
     21300038: Tiles_for_ground_19
-    21300040: Tiles_for_ground_20
-    21300042: Tiles_for_ground_21
-    21300044: Tiles_for_ground_22
-    21300046: Tiles_for_ground_23
-    21300048: Tiles_for_ground_24
-    21300050: Tiles_for_ground_25
-    21300052: Tiles_for_ground_26
-    21300054: Tiles_for_ground_27
-    21300056: Tiles_for_ground_28
+    21300040: bottomright
+    21300042: bottommiddle
+    21300044: bottomleft
+    21300046: platformleft
+    21300048: platformmiddle
+    21300050: platformright
+    21300052: verticalplatformtop
+    21300054: verticalplatformmiddle
+    21300056: verticalplatformbottom
     21300058: Tiles_for_ground_29
     21300060: Tiles_for_ground_30
     21300062: Tiles_for_ground_31
@@ -121,7 +121,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tiles_for_ground_0
+      name: solo
       rect:
         serializedVersion: 2
         x: 128
@@ -135,11 +135,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_1
+      name: solobg
       rect:
         serializedVersion: 2
-        x: 384
-        y: 408
+        x: 256
+        y: 472
         width: 64
         height: 64
       alignment: 0
@@ -152,7 +152,7 @@ TextureImporter:
       name: Tiles_for_ground_2
       rect:
         serializedVersion: 2
-        x: 448
+        x: 384
         y: 408
         width: 64
         height: 64
@@ -166,7 +166,7 @@ TextureImporter:
       name: Tiles_for_ground_3
       rect:
         serializedVersion: 2
-        x: 512
+        x: 448
         y: 408
         width: 64
         height: 64
@@ -180,6 +180,20 @@ TextureImporter:
       name: Tiles_for_ground_4
       rect:
         serializedVersion: 2
+        x: 512
+        y: 408
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: topright
+      rect:
+        serializedVersion: 2
         x: 128
         y: 344
         width: 64
@@ -191,7 +205,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_5
+      name: topmiddle
       rect:
         serializedVersion: 2
         x: 192
@@ -205,24 +219,10 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_6
+      name: topleft
       rect:
         serializedVersion: 2
         x: 256
-        y: 344
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Tiles_for_ground_7
-      rect:
-        serializedVersion: 2
-        x: 320
         y: 344
         width: 64
         height: 64
@@ -236,7 +236,7 @@ TextureImporter:
       name: Tiles_for_ground_8
       rect:
         serializedVersion: 2
-        x: 384
+        x: 320
         y: 344
         width: 64
         height: 64
@@ -247,10 +247,10 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_10
+      name: Tiles_for_ground_9
       rect:
         serializedVersion: 2
-        x: 512
+        x: 384
         y: 344
         width: 64
         height: 64
@@ -264,7 +264,7 @@ TextureImporter:
       name: Tiles_for_ground_11
       rect:
         serializedVersion: 2
-        x: 576
+        x: 512
         y: 344
         width: 64
         height: 64
@@ -278,6 +278,20 @@ TextureImporter:
       name: Tiles_for_ground_12
       rect:
         serializedVersion: 2
+        x: 576
+        y: 344
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: middleleft
+      rect:
+        serializedVersion: 2
         x: 128
         y: 280
         width: 64
@@ -289,7 +303,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_13
+      name: middlemiddle
       rect:
         serializedVersion: 2
         x: 192
@@ -303,7 +317,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_14
+      name: middleright
       rect:
         serializedVersion: 2
         x: 256
@@ -317,7 +331,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_19
+      name: bottomright
       rect:
         serializedVersion: 2
         x: 128
@@ -331,10 +345,24 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_20
+      name: bottommiddle
       rect:
         serializedVersion: 2
         x: 192
+        y: 217
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bottomleft
+      rect:
+        serializedVersion: 2
+        x: 256
         y: 216
         width: 64
         height: 64
@@ -345,11 +373,81 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_21
+      name: platformleft
       rect:
         serializedVersion: 2
-        x: 256
+        x: 448
         y: 216
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: platformmiddle
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 216
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: platformright
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 216
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: verticalplatformtop
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 152
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: verticalplatformmiddle
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 88
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: verticalplatformbottom
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 24
         width: 64
         height: 64
       alignment: 0
