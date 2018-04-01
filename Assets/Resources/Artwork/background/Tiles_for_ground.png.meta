@@ -1,13 +1,13 @@
 fileFormatVersion: 2
 guid: c2dfc61f68c2d4a48af9c4e5d488eb3c
-timeCreated: 1522567558
+timeCreated: 1522569822
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: solo
     21300002: solobg
-    21300004: Tiles_for_ground_2
-    21300006: Tiles_for_ground_3
+    21300004: solo
+    21300006: solobg
     21300008: Tiles_for_ground_4
     21300010: topright
     21300012: topmiddle
@@ -35,16 +35,17 @@ TextureImporter:
     21300056: verticalplatformbottom
     21300058: Tiles_for_ground_29
     21300060: Tiles_for_ground_30
-    21300062: Tiles_for_ground_31
-    21300064: Tiles_for_ground_32
-    21300066: Tiles_for_ground_33
+    21300062: bottomleft
+    21300064: bottommiddle
+    21300066: bottomright
     21300068: Tiles_for_ground_34
     21300070: Tiles_for_ground_35
-    21300072: Tiles_for_ground_36
-    21300074: Tiles_for_ground_37
-    21300076: Tiles_for_ground_38
-    21300078: Tiles_for_ground_39
-    21300080: Tiles_for_ground_40
+    21300072: platformleft
+    21300074: platformmiddle
+    21300076: platformright
+    21300078: verticalplatformtop
+    21300080: verticalplatformmiddle
+    21300082: Tiles_for_ground_20
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -99,9 +100,9 @@ TextureImporter:
   platformSettings:
   - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,9 +110,9 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - buildTarget: Standalone
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,11 +126,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 472
+        y: 636
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,109 +140,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 472
+        y: 636
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Tiles_for_ground_2
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 408
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Tiles_for_ground_3
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 408
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Tiles_for_ground_4
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 408
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: topright
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 344
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: topmiddle
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 344
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: topleft
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 344
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Tiles_for_ground_8
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 344
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -251,11 +154,25 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 344
+        y: 572
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tiles_for_ground_10
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 572
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -265,25 +182,109 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 344
+        y: 572
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_12
+      name: topleft
       rect:
         serializedVersion: 2
-        x: 576
-        y: 344
+        x: 128
+        y: 508
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: topmiddle
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 508
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: topright
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 508
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tiles_for_ground_16
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 508
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tiles_for_ground_17
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 508
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tiles_for_ground_19
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 508
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tiles_for_ground_20
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 508
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -293,11 +294,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 280
+        y: 444
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -307,11 +308,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 280
+        y: 444
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -321,25 +322,25 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 280
+        y: 444
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: bottomright
+      name: bottomleft
       rect:
         serializedVersion: 2
         x: 128
-        y: 216
+        y: 380
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -349,25 +350,25 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 217
+        y: 380
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: bottomleft
+      name: bottomright
       rect:
         serializedVersion: 2
         x: 256
-        y: 216
+        y: 380
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -377,11 +378,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 448
-        y: 216
+        y: 380
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -391,11 +392,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 216
+        y: 380
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -405,11 +406,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 576
-        y: 216
+        y: 380
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -419,11 +420,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 152
+        y: 316
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -433,11 +434,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 88
+        y: 252
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -447,11 +448,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 24
+        y: 188
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
