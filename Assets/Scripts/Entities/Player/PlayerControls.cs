@@ -66,7 +66,7 @@ public class PlayerControls : MonoBehaviour
             }
         }
         //test gun armature
-        if (anim != null)
+        if (anim.animation.animations.Count > 0)
         {
             if (armed)
             {
@@ -80,19 +80,22 @@ public class PlayerControls : MonoBehaviour
                     if (!rightarm.animation.isPlaying && rightarm.animationName != "armed")
                         rightarm.animation.Play("armed");
                 }
-                if (up)
+                if (leftshoulder != null && rightshoulder != null)
                 {
-                    leftshoulder.offset.rotation = Mathf.Deg2Rad * -85;
-                    rightshoulder.offset.rotation = Mathf.Deg2Rad * -45;
-                }
-                else if (down)
-                {
-                    leftshoulder.offset.rotation = Mathf.Deg2Rad * 85;
-                    leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 45;
-                }
-                else
-                {
-                    leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
+                    if (up)
+                    {
+                        leftshoulder.offset.rotation = Mathf.Deg2Rad * -85;
+                        rightshoulder.offset.rotation = Mathf.Deg2Rad * -45;
+                    }
+                    else if (down)
+                    {
+                        leftshoulder.offset.rotation = Mathf.Deg2Rad * 85;
+                        leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 45;
+                    }
+                    else
+                    {
+                        leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
+                    }
                 }
             }
             else
@@ -107,7 +110,8 @@ public class PlayerControls : MonoBehaviour
                     if (!rightarm.animation.isPlaying && rightarm.animationName != "armed")
                         rightarm.animation.Play("unarmed");
                 }
-                leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
+                if(leftshoulder != null && rightshoulder != null)
+                    leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
             }
             if (po.velocity.x >= 0)
             {
@@ -122,12 +126,16 @@ public class PlayerControls : MonoBehaviour
                 if (Mathf.Abs(po.velocity.x) > 0.5f)
                 {
                     if (anim.animation.lastAnimationName != "run")
+                    {
                         anim.animation.FadeIn("run", 0.1f, -1, 0);
+                    }
                 }
                 else
                 {
                     if (anim.animation.lastAnimationName != "idle")
+                    {
                         anim.animation.FadeIn("idle", 0.1f, -1, 0);
+                    }
                 }
             }
             else
