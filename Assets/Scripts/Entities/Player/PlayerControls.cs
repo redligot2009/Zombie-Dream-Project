@@ -9,14 +9,20 @@ public class PlayerControls : MonoBehaviour
     PhysicsObject po;
     public float jumpSpeed = 8f, moveSpeed = 8f;
     //UnityEngine.Transform anim;
-    UnityArmatureComponent anim;
-
+    UnityArmatureComponent anim, leftarm = null, rightarm = null;
+    Vector2 input;
+    Bone rightshoulder;
     void Start()
     {
         po = GetComponent<PhysicsObject>();
         //anim = GameObject.Find("anim").GetComponent<UnityEngine.Transform>();
-        anim = GameObject.Find("anim").GetComponent<UnityArmatureComponent>();
+        anim = transform.Find("anim").GetComponent<UnityArmatureComponent>();
+        leftarm = anim.transform.Find("leftarm (leftarm)").GetComponent<UnityArmatureComponent>();
+        rightarm = anim.transform.Find("rightarm (rightarm)").GetComponent<UnityArmatureComponent>();
+        rightshoulder = rightarm.armature.GetBone("right_shoulder");
     }
+
+    bool armed = true;
 
     void Update()
     {
@@ -55,6 +61,46 @@ public class PlayerControls : MonoBehaviour
         {
             anim.eulerAngles = new Vector3(0, 180, 0);
         }*/
+        //test gun armature
+        if(armed)
+        {
+            if (leftarm != null)
+            {
+                if (leftarm.animationName != "armed")
+                    leftarm.animation.Play("armed");
+            }
+            if (rightarm != null)
+            {
+                if (rightarm.animationName != "armed")
+                    rightarm.animation.Play("armed");
+            }
+            if(Input.GetKey(KeyCode.W))
+            {
+                rightshoulder.offset.rotation = Mathf.Deg2Rad * -45;
+            }
+            else if(Input.GetKey(KeyCode.S))
+            {
+                rightshoulder.offset.rotation = Mathf.Deg2Rad * 45;
+            }
+            else
+            {
+                rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
+            }
+        }
+        else
+        {
+            if (leftarm != null)
+            {
+                if (leftarm.animationName != "unarmed")
+                    leftarm.animation.Play("unarmed");
+            }
+            if (rightarm != null)
+            {
+                if (rightarm.animationName != "unarmed")
+                    rightarm.animation.Play("unarmed");
+            }
+            rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
+        }
         if(po.velocity.x >= 0)
         {
             anim.armature.flipX = false;

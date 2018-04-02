@@ -6,16 +6,16 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: solo
     21300002: solobg
-    21300004: Tiles_for_ground_2
+    21300004: slopeleft
     21300006: Tiles_for_ground_3
-    21300008: Tiles_for_ground_4
+    21300008: sloperight
     21300010: topleft
     21300012: topmiddle
     21300014: topright
     21300016: Tiles_for_ground_8
-    21300018: Tiles_for_ground_9
+    21300018: slopeleftbelow
     21300020: Tiles_for_ground_10
-    21300022: Tiles_for_ground_11
+    21300022: sloperightbelow
     21300024: Tiles_for_ground_12
     21300026: middleleft
     21300028: middlemiddle
@@ -72,7 +72,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: -1
     mipBias: -1
     wrapU: 1
@@ -83,7 +83,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 0
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -157,7 +157,7 @@ TextureImporter:
         - {x: 32, y: 32}
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_2
+      name: slopeleft
       rect:
         serializedVersion: 2
         x: 384
@@ -192,7 +192,7 @@ TextureImporter:
         - {x: 32, y: 32}
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_4
+      name: sloperight
       rect:
         serializedVersion: 2
         x: 512
@@ -281,7 +281,7 @@ TextureImporter:
         - {x: 32, y: 32}
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_9
+      name: slopeleftbelow
       rect:
         serializedVersion: 2
         x: 384
@@ -299,7 +299,7 @@ TextureImporter:
         - {x: 32, y: 32}
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Tiles_for_ground_11
+      name: sloperightbelow
       rect:
         serializedVersion: 2
         x: 512

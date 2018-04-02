@@ -120,6 +120,7 @@ namespace UnityEngine
 			{
 				if (RuleMatches(rule, position, tilemap, angle))
 				{
+                    
 					transform = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, -angle), Vector3.one);
 					return true;
 				}
