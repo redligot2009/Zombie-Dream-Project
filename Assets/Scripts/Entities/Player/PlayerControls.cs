@@ -11,7 +11,7 @@ public class PlayerControls : MonoBehaviour
     //UnityEngine.Transform anim;
     UnityArmatureComponent anim, leftarm = null, rightarm = null;
     Vector2 input;
-    Bone rightshoulder;
+    Bone rightshoulder, leftshoulder;
     void Start()
     {
         po = GetComponent<PhysicsObject>();
@@ -20,6 +20,7 @@ public class PlayerControls : MonoBehaviour
         leftarm = anim.transform.Find("leftarm (leftarm)").GetComponent<UnityArmatureComponent>();
         rightarm = anim.transform.Find("rightarm (rightarm)").GetComponent<UnityArmatureComponent>();
         rightshoulder = rightarm.armature.GetBone("right_shoulder");
+        leftshoulder = leftarm.armature.GetBone("left_shoulder");
     }
 
     bool armed = true;
@@ -53,14 +54,6 @@ public class PlayerControls : MonoBehaviour
                 po.velocity.y = po.velocity.y * 0.65f;
             }
         }
-        /*if(po.velocity.x > 0)
-        {
-            anim.eulerAngles = new Vector3(0, 0, 0);
-        }
-        else if(po.velocity.x < 0)
-        {
-            anim.eulerAngles = new Vector3(0, 180, 0);
-        }*/
         //test gun armature
         if(armed)
         {
@@ -76,15 +69,17 @@ public class PlayerControls : MonoBehaviour
             }
             if(Input.GetKey(KeyCode.W))
             {
+                leftshoulder.offset.rotation = Mathf.Deg2Rad * -85;
                 rightshoulder.offset.rotation = Mathf.Deg2Rad * -45;
             }
             else if(Input.GetKey(KeyCode.S))
             {
-                rightshoulder.offset.rotation = Mathf.Deg2Rad * 45;
+                leftshoulder.offset.rotation = Mathf.Deg2Rad * 85;
+                leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 45;
             }
             else
             {
-                rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
+                leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
             }
         }
         else
@@ -99,7 +94,7 @@ public class PlayerControls : MonoBehaviour
                 if (rightarm.animationName != "unarmed")
                     rightarm.animation.Play("unarmed");
             }
-            rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
+            leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
         }
         if(po.velocity.x >= 0)
         {
@@ -109,15 +104,35 @@ public class PlayerControls : MonoBehaviour
         {
             anim.armature.flipX = true;
         }
-        if(Mathf.Abs(po.velocity.x) > 0.5f)
+        if (po.collisions.below)
         {
-            if(anim.animation.lastAnimationName != "run")
-                anim.animation.FadeIn("run",0.1f,-1,0);
+            if (Mathf.Abs(po.velocity.x) > 0.5f)
+            {
+                if (anim.animation.lastAnimationName != "run")
+                    anim.animation.FadeIn("run", 0.1f, -1, 0);
+            }
+            else
+            {
+                if (anim.animation.lastAnimationName != "idle")
+                    anim.animation.FadeIn("idle", 0.1f, -1, 0);
+            }
         }
         else
         {
-            if (anim.animation.lastAnimationName != "idle")
-                anim.animation.FadeIn("idle", 0.1f, -1, 0);
+            if (po.velocity.y >= 0)
+            {
+                if (anim.animation.lastAnimationName != "jump")
+                {
+                    anim.animation.FadeIn("jump", 0.1f, -1, 0);
+                }
+            }
+            else
+            {
+                if (anim.animation.lastAnimationName != "fall")
+                {
+                    anim.animation.FadeIn("fall", 0.1f, -1, 0);
+                }
+            }
         }
         //physics shit
         po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;
