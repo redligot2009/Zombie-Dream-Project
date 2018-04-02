@@ -25,17 +25,28 @@ public class PlayerControls : MonoBehaviour
 
     bool armed = true;
 
+    //controls
+    bool left = false, right = false, up = false, down = false;
+    bool jump = false, attack = false, jumprelease = false;
     void Update()
     {
+        //control bindings
+        left = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
+        right = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
+        jump = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Z);
+        jumprelease = Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Z);
+        up = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+        down = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+        //hit ground
         if (po.collisions.below || po.collisions.above)
         {
             po.velocity.y = 0;
         }
-        if (Input.GetKey(KeyCode.A) && !po.collisions.left)
+        if (left && !po.collisions.left)
         {
             po.velocity.x = Mathf.Lerp(po.velocity.x, -moveSpeed, Time.deltaTime * 5f);
         }
-        else if (Input.GetKey(KeyCode.D) && !po.collisions.right)
+        else if (right && !po.collisions.right)
         {
             po.velocity.x = Mathf.Lerp(po.velocity.x, moveSpeed, Time.deltaTime * 5f);
         }
@@ -43,11 +54,11 @@ public class PlayerControls : MonoBehaviour
         {
             po.velocity.x = Mathf.Lerp(po.velocity.x, 0f, Time.deltaTime * 10f);
         }
-        if (Input.GetKey(KeyCode.Space) && po.collisions.below)
+        if (jump && po.collisions.below)
         {
             po.velocity.y = jumpSpeed;
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
+        else if (jumprelease)
         {
             if (po.velocity.y > 0)
             {
@@ -55,82 +66,85 @@ public class PlayerControls : MonoBehaviour
             }
         }
         //test gun armature
-        if(armed)
+        if (anim != null)
         {
-            if (leftarm != null)
+            if (armed)
             {
-                if (leftarm.animationName != "armed")
-                    leftarm.animation.Play("armed");
-            }
-            if (rightarm != null)
-            {
-                if (rightarm.animationName != "armed")
-                    rightarm.animation.Play("armed");
-            }
-            if(Input.GetKey(KeyCode.W))
-            {
-                leftshoulder.offset.rotation = Mathf.Deg2Rad * -85;
-                rightshoulder.offset.rotation = Mathf.Deg2Rad * -45;
-            }
-            else if(Input.GetKey(KeyCode.S))
-            {
-                leftshoulder.offset.rotation = Mathf.Deg2Rad * 85;
-                leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 45;
-            }
-            else
-            {
-                leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
-            }
-        }
-        else
-        {
-            if (leftarm != null)
-            {
-                if (leftarm.animationName != "unarmed")
-                    leftarm.animation.Play("unarmed");
-            }
-            if (rightarm != null)
-            {
-                if (rightarm.animationName != "unarmed")
-                    rightarm.animation.Play("unarmed");
-            }
-            leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
-        }
-        if(po.velocity.x >= 0)
-        {
-            anim.armature.flipX = false;
-        }
-        else
-        {
-            anim.armature.flipX = true;
-        }
-        if (po.collisions.below)
-        {
-            if (Mathf.Abs(po.velocity.x) > 0.5f)
-            {
-                if (anim.animation.lastAnimationName != "run")
-                    anim.animation.FadeIn("run", 0.1f, -1, 0);
-            }
-            else
-            {
-                if (anim.animation.lastAnimationName != "idle")
-                    anim.animation.FadeIn("idle", 0.1f, -1, 0);
-            }
-        }
-        else
-        {
-            if (po.velocity.y >= 0)
-            {
-                if (anim.animation.lastAnimationName != "jump")
+                if (leftarm != null)
                 {
-                    anim.animation.FadeIn("jump", 0.1f, -1, 0);
+                    if (!leftarm.animation.isPlaying && leftarm.animationName != "armed")
+                        leftarm.animation.Play("armed");
+                }
+                if (rightarm != null)
+                {
+                    if (!rightarm.animation.isPlaying && rightarm.animationName != "armed")
+                        rightarm.animation.Play("armed");
+                }
+                if (up)
+                {
+                    leftshoulder.offset.rotation = Mathf.Deg2Rad * -85;
+                    rightshoulder.offset.rotation = Mathf.Deg2Rad * -45;
+                }
+                else if (down)
+                {
+                    leftshoulder.offset.rotation = Mathf.Deg2Rad * 85;
+                    leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 45;
+                }
+                else
+                {
+                    leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
                 }
             }
             else
             {
-                if (anim.animation.lastAnimationName != "fall")
+                if (leftarm != null)
                 {
-                    anim.animation.FadeIn("fall", 0.1f, -1, 0);
+                    if (!leftarm.animation.isPlaying && leftarm.animationName != "armed")
+                        leftarm.animation.Play("unarmed");
+                }
+                if (rightarm != null)
+                {
+                    if (!rightarm.animation.isPlaying && rightarm.animationName != "armed")
+                        rightarm.animation.Play("unarmed");
+                }
+                leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
+            }
+            if (po.velocity.x >= 0)
+            {
+                anim.armature.flipX = false;
+            }
+            else
+            {
+                anim.armature.flipX = true;
+            }
+            if (po.collisions.below)
+            {
+                if (Mathf.Abs(po.velocity.x) > 0.5f)
+                {
+                    if (anim.animation.lastAnimationName != "run")
+                        anim.animation.FadeIn("run", 0.1f, -1, 0);
+                }
+                else
+                {
+                    if (anim.animation.lastAnimationName != "idle")
+                        anim.animation.FadeIn("idle", 0.1f, -1, 0);
+                }
+            }
+            else
+            {
+                if (po.velocity.y >= 0)
+                {
+                    if (anim.animation.lastAnimationName != "jump")
+                    {
+                        anim.animation.FadeIn("jump", 0.1f, -1, 0);
+                    }
+                }
+                else
+                {
+                    if (anim.animation.lastAnimationName != "fall")
+                    {
+                        anim.animation.FadeIn("fall", 0.1f, -1, 0);
+                    }
                 }
             }
         }
