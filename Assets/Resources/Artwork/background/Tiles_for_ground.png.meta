@@ -169,9 +169,9 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -32, y: -32}
+      - - {x: -21.785034, y: -32}
         - {x: 32, y: -32}
-        - {x: 32, y: 32}
+        - {x: 32, y: 20.150696}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Tiles_for_ground_3
@@ -186,10 +186,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -32, y: 32}
+      - - {x: -31.810577, y: 18.7406}
         - {x: -32, y: -32}
         - {x: 32, y: -32}
-        - {x: 32, y: 32}
+        - {x: 32, y: 20.25592}
       tessellationDetail: 0
     - serializedVersion: 2
       name: sloperight
@@ -205,8 +205,8 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -32, y: -32}
-        - {x: 32, y: -32}
-        - {x: -32, y: 32}
+        - {x: 20.530457, y: -32}
+        - {x: -32, y: 20.182922}
       tessellationDetail: 0
     - serializedVersion: 2
       name: topleft
@@ -221,10 +221,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -32, y: 32}
+      - - {x: -32, y: 19.742126}
         - {x: -32, y: -32}
         - {x: 32, y: -32}
-        - {x: 32, y: 32}
+        - {x: 31.5914, y: 19.742126}
       tessellationDetail: 0
     - serializedVersion: 2
       name: topmiddle
@@ -239,10 +239,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -32, y: 32}
+      - - {x: -32, y: 19.742126}
         - {x: -32, y: -32}
         - {x: 32, y: -32}
-        - {x: 32, y: 32}
+        - {x: 32, y: 19.333496}
       tessellationDetail: 0
     - serializedVersion: 2
       name: topright
@@ -257,10 +257,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -32, y: 32}
+      - - {x: -32, y: 20.150696}
         - {x: -32, y: -32}
         - {x: 32, y: -32}
-        - {x: 32, y: 32}
+        - {x: 31.18283, y: 20.559265}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Tiles_for_ground_8
@@ -275,10 +275,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -32, y: 32}
+      - - {x: -31.521698, y: 19.883179}
         - {x: -32, y: -32}
         - {x: 32, y: -32}
-        - {x: 32, y: 32}
+        - {x: 32, y: 20.18628}
       tessellationDetail: 0
     - serializedVersion: 2
       name: slopeleftbelow
@@ -293,10 +293,11 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -32, y: 32}
+      - - {x: -32, y: 18.835144}
         - {x: -32, y: -32}
         - {x: 32, y: -32}
         - {x: 32, y: 32}
+        - {x: -20.248047, y: 32}
       tessellationDetail: 0
     - serializedVersion: 2
       name: sloperightbelow
@@ -311,10 +312,11 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -32, y: 32}
+      - - {x: 15.609436, y: 32}
+        - {x: -32, y: 32}
         - {x: -32, y: -32}
         - {x: 32, y: -32}
-        - {x: 32, y: 32}
+        - {x: 32, y: 19.003235}
       tessellationDetail: 0
     - serializedVersion: 2
       name: Tiles_for_ground_12
@@ -329,10 +331,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -32, y: 32}
+      - - {x: -32, y: 18.288818}
         - {x: -32, y: -32}
         - {x: 32, y: -32}
-        - {x: 32, y: 32}
+        - {x: 32, y: 19.564331}
       tessellationDetail: 0
     - serializedVersion: 2
       name: middleleft
@@ -500,7 +502,7 @@ TextureImporter:
       name: verticalplatformtop
       rect:
         serializedVersion: 2
-        x: 384
+        x: 385
         y: 352
         width: 64
         height: 64
@@ -511,8 +513,8 @@ TextureImporter:
       physicsShape:
       - - {x: -32, y: -32}
         - {x: 32, y: -32}
-        - {x: 32, y: 32}
-        - {x: -32, y: 32}
+        - {x: 31.588074, y: 15.539795}
+        - {x: -31.176117, y: 14.873169}
       tessellationDetail: 0
     - serializedVersion: 2
       name: verticalplatformmiddle
