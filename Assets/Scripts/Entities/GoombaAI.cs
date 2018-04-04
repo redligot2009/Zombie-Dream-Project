@@ -50,7 +50,7 @@ public class GoombaAI : MonoBehaviour
             if (state == EnemyState.falling)
             {
             }
-            if (state == EnemyState.walking)
+            if (state == EnemyState.walking || state != EnemyState.walking && po.gravityModifier == 0)
             {
                 if (dirx == -1)
                 {
