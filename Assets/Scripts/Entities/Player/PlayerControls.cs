@@ -100,18 +100,17 @@ public class PlayerControls : MonoBehaviour
                     {
                         if (up)
                         {
-                            leftshoulder.offset.rotation = Mathf.Lerp(leftshoulder.offset.rotation, Mathf.Deg2Rad * -85,Time.deltaTime * 10f);
-                            rightshoulder.offset.rotation = Mathf.Lerp(rightshoulder.offset.rotation, Mathf.Deg2Rad * -45,Time.deltaTime * 10f);
+                            leftshoulder.offset.rotation = Mathf.Deg2Rad * -85;
+                            rightshoulder.offset.rotation = Mathf.Deg2Rad * -45;
                         }
                         else if (down)
                         {
-                            leftshoulder.offset.rotation = Mathf.Lerp(leftshoulder.offset.rotation, Mathf.Deg2Rad * 45, Time.deltaTime * 10f);
-                            rightshoulder.offset.rotation = Mathf.Lerp(rightshoulder.offset.rotation, Mathf.Deg2Rad * 45,Time.deltaTime * 10f);
+                            leftshoulder.offset.rotation = Mathf.Deg2Rad * 85;
+                            leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 45;
                         }
                         else
                         {
-                            leftshoulder.offset.rotation = Mathf.Lerp(leftshoulder.offset.rotation, Mathf.Deg2Rad * 0, Time.deltaTime * 10f);
-                            rightshoulder.offset.rotation = Mathf.Lerp(rightshoulder.offset.rotation,Mathf.Deg2Rad * 0,Time.deltaTime * 10f);
+                            leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
                         }
                     }
                 }
