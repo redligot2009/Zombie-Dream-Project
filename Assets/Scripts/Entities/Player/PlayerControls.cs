@@ -10,8 +10,15 @@ public class PlayerControls : MonoBehaviour
     public float jumpSpeed = 8f, moveSpeed = 8f;
     //UnityEngine.Transform anim;
     UnityArmatureComponent anim, leftarm = null, rightarm = null;
+    //UnityArmatureComponent righthand;
     Vector2 input;
     Bone rightshoulder, leftshoulder;
+    Bone weaponend;
+
+    public Health health;
+
+    public GameObject bullet;
+
     void Start()
     {
         po = GetComponent<PhysicsObject>();
@@ -21,13 +28,29 @@ public class PlayerControls : MonoBehaviour
         rightarm = anim.transform.Find("rightarm (rightarm)").GetComponent<UnityArmatureComponent>();
         rightshoulder = rightarm.armature.GetBone("right_shoulder");
         leftshoulder = leftarm.armature.GetBone("left_shoulder");
+        weaponend = rightshoulder.armature.GetBone("arm").armature.GetBone("weaponend");
+        health = GetComponent<Health>();
     }
 
-    bool armed = true;
+    bool armed = true, dead = false;
 
     //controls
     bool left = false, right = false, up = false, down = false;
     bool jump = false, attack = false, jumprelease = false;
+    bool shoot = false;
+
+    void GetHurt()
+    {
+
+    }
+
+    void Shoot()
+    {
+
+    }
+
+    int facing = 1;
+
     void Update()
     {
         //control bindings
@@ -37,127 +60,184 @@ public class PlayerControls : MonoBehaviour
         jumprelease = Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Z);
         up = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
         down = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
-        //hit ground
-        if (po.collisions.below || po.collisions.above)
+        shoot = Input.GetKeyDown(KeyCode.X);
+        if(health.health == 0)
         {
-            po.velocity.y = 0;
+            dead = true;
         }
-        if (left && !po.collisions.left)
+        if (!dead)
         {
-            po.velocity.x = Mathf.Lerp(po.velocity.x, -moveSpeed, Time.deltaTime * 5f);
-        }
-        else if (right && !po.collisions.right)
-        {
-            po.velocity.x = Mathf.Lerp(po.velocity.x, moveSpeed, Time.deltaTime * 5f);
-        }
-        else
-        {
-            po.velocity.x = Mathf.Lerp(po.velocity.x, 0f, Time.deltaTime * 10f);
-        }
-        if (jump && po.collisions.below)
-        {
-            po.velocity.y = jumpSpeed;
-        }
-        else if (jumprelease)
-        {
-            if (po.velocity.y > 0)
+            //hit ground
+            if (po.collisions.below || po.collisions.above)
             {
-                po.velocity.y = po.velocity.y * 0.65f;
+                po.velocity.y = 0;
             }
-        }
-        //test gun armature
-        if (anim.animation.animations.Count > 0)
-        {
-            if (armed)
+            if (left && !po.collisions.left)
             {
-                if (leftarm != null)
+                po.velocity.x = Mathf.Lerp(po.velocity.x, -moveSpeed, Time.deltaTime * 5f);
+            }
+            else if (right && !po.collisions.right)
+            {
+                po.velocity.x = Mathf.Lerp(po.velocity.x, moveSpeed, Time.deltaTime * 5f);
+            }
+            else
+            {
+                po.velocity.x = Mathf.Lerp(po.velocity.x, 0f, Time.deltaTime * 10f);
+            }
+            if (jump && po.collisions.below)
+            {
+                po.velocity.y = jumpSpeed;
+            }
+            else if (jumprelease)
+            {
+                if (po.velocity.y > 0)
                 {
-                    if (!leftarm.animation.isPlaying && leftarm.animationName != "armed")
-                        leftarm.animation.Play("armed");
+                    po.velocity.y = po.velocity.y * 0.65f;
                 }
-                if (rightarm != null)
+            }
+            //gun armature
+            if (anim.animation.animations.Count > 0)
+            {
+                if (armed)
                 {
-                    if (!rightarm.animation.isPlaying && rightarm.animationName != "armed")
-                        rightarm.animation.Play("armed");
-                }
-                if (leftshoulder != null && rightshoulder != null)
-                {
-                    if (up)
+                    if (leftarm != null)
                     {
-                        leftshoulder.offset.rotation = Mathf.Deg2Rad * -85;
-                        rightshoulder.offset.rotation = Mathf.Deg2Rad * -45;
+                        if (leftarm.animation.isCompleted && leftarm.animationName != "armed")
+                            leftarm.animation.Play("armed");
                     }
-                    else if (down)
+                    if (rightarm != null)
                     {
-                        leftshoulder.offset.rotation = Mathf.Deg2Rad * 85;
-                        leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 45;
+                        if (rightarm.animation.isCompleted && rightarm.animationName != "armed")
+                            rightarm.animation.Play("armed");
+                    }
+                    //shoot logic
+                    if (shoot)
+                    {
+                        if(rightarm.animationName != "shoot")
+                            rightarm.animation.FadeIn("shoot",0.05f,1);
+                        if(leftarm.animationName != "shoot")
+                            leftarm.animation.FadeIn("shoot",0.05f,1);
+                        GameObject go = Instantiate(bullet);
+                        go.transform.position = new Vector3(transform.position.x + facing * (po.coll.bounds.size.x / 2), leftarm.transform.position.y);
+                        go.transform.eulerAngles = new Vector3(0, (facing==1?0:180), -rightshoulder.offset.rotation * Mathf.Rad2Deg);
+                    }
+                    if (leftshoulder != null && rightshoulder != null)
+                    {
+                        if (up)
+                        {
+                            leftshoulder.offset.rotation = Mathf.Deg2Rad * -85;
+                            rightshoulder.offset.rotation = Mathf.Deg2Rad * -45;
+                        }
+                        else if (down)
+                        {
+                            leftshoulder.offset.rotation = Mathf.Deg2Rad * 85;
+                            leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 45;
+                        }
+                        else
+                        {
+                            leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
+                        }
+                    }
+                }
+                else
+                {
+                    if (leftarm != null)
+                    {
+                        if (!leftarm.animation.isPlaying && leftarm.animationName != "armed")
+                            leftarm.animation.Play("unarmed");
+                    }
+                    if (rightarm != null)
+                    {
+                        if (!rightarm.animation.isPlaying && rightarm.animationName != "armed")
+                            rightarm.animation.Play("unarmed");
+                    }
+                    if (leftshoulder != null && rightshoulder != null)
+                        leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
+                }
+                if (po.velocity.x >= 0)
+                {
+                    anim.armature.flipX = false;
+                    facing = 1;
+                }
+                else
+                {
+                    anim.armature.flipX = true;
+                    facing = -1;
+                }
+                //animations player
+                if (po.collisions.below)
+                {
+                    //run
+                    if (Mathf.Abs(po.velocity.x) > 0.5f)
+                    {
+                        if (anim.animation.lastAnimationName != "run")
+                        {
+                            anim.animation.FadeIn("run", 0.1f, -1, 0);
+                        }
                     }
                     else
                     {
-                        leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
-                    }
-                }
-            }
-            else
-            {
-                if (leftarm != null)
-                {
-                    if (!leftarm.animation.isPlaying && leftarm.animationName != "armed")
-                        leftarm.animation.Play("unarmed");
-                }
-                if (rightarm != null)
-                {
-                    if (!rightarm.animation.isPlaying && rightarm.animationName != "armed")
-                        rightarm.animation.Play("unarmed");
-                }
-                if(leftshoulder != null && rightshoulder != null)
-                    leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
-            }
-            if (po.velocity.x >= 0)
-            {
-                anim.armature.flipX = false;
-            }
-            else
-            {
-                anim.armature.flipX = true;
-            }
-            if (po.collisions.below)
-            {
-                if (Mathf.Abs(po.velocity.x) > 0.5f)
-                {
-                    if (anim.animation.lastAnimationName != "run")
-                    {
-                        anim.animation.FadeIn("run", 0.1f, -1, 0);
+                    //idle
+                        if (anim.animation.lastAnimationName != "idle")
+                        {
+                            anim.animation.FadeIn("idle", 0.1f, -1, 0);
+                        }
                     }
                 }
                 else
                 {
-                    if (anim.animation.lastAnimationName != "idle")
+                    if (po.velocity.y >= 0)
                     {
-                        anim.animation.FadeIn("idle", 0.1f, -1, 0);
+                    //jump
+                        if (anim.animation.lastAnimationName != "jump")
+                        {
+                            anim.animation.FadeIn("jump", 0.1f, -1, 0);
+                        }
+                    }
+                    else
+                    {
+                    //fall
+                        if (anim.animation.lastAnimationName != "fall")
+                        {
+                            anim.animation.FadeIn("fall", 0.1f, -1, 0);
+                        }
                     }
                 }
+            }
+            //hit toxic waste
+
+            bool hitToxicWaste = po.CheckHorizontal(LayerMask.GetMask("hazard")) || po.CheckVertical(LayerMask.GetMask("hazard"));
+
+            if(hitToxicWaste)
+            {
+                health.Hurt();
+            }
+
+            //hit enemy
+
+            bool hitEnemy = po.CheckHorizontal(LayerMask.GetMask("enemy"));
+            bool hitEnemyBounce = po.CheckVertical(LayerMask.GetMask("enemy"),0.25f);
+
+            if(hitEnemy)
+            {
+                health.Hurt();
             }
             else
             {
-                if (po.velocity.y >= 0)
+                if (hitEnemyBounce)
                 {
-                    if (anim.animation.lastAnimationName != "jump")
-                    {
-                        anim.animation.FadeIn("jump", 0.1f, -1, 0);
-                    }
-                }
-                else
-                {
-                    if (anim.animation.lastAnimationName != "fall")
-                    {
-                        anim.animation.FadeIn("fall", 0.1f, -1, 0);
-                    }
+                    po.velocity.y = jumpSpeed;
                 }
             }
+
+            //physics shit
+            po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;
+            po.Move(po.velocity * Time.deltaTime);
         }
-        //physics shit
-        po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;
-        po.Move(po.velocity * Time.deltaTime);
+        else
+        {
+            leftarm.animation.FadeIn("unarmed",0.1f);
+            rightarm.animation.FadeIn("unarmed",0.1f);
+        }
     }
 }

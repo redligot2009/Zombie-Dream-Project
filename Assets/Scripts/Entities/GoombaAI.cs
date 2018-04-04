@@ -18,13 +18,26 @@ public class GoombaAI : MonoBehaviour
 
     private EnemyState state = EnemyState.falling;
     
-	void Start ()
+    public Health health;
+
+    void Start ()
     {
         po = GetComponent<PhysicsObject>();
+        health = GetComponent<Health>();
+        po.velocity.x = moveSpeed.x;
 	}
-	
+
+    void GetHurt()
+    {
+
+    }
+
 	void Update ()
     {
+        if (health.health == 0)
+        {
+            state = EnemyState.dead;
+        }
         if (state != EnemyState.dead)
         {
             if (po.collisions.below || po.collisions.above)
@@ -37,7 +50,7 @@ public class GoombaAI : MonoBehaviour
             if (state == EnemyState.falling)
             {
             }
-            if (state == EnemyState.walking)
+            if (state == EnemyState.walking || state != EnemyState.walking && po.gravityModifier == 0)
             {
                 if (dirx == -1)
                 {
@@ -52,9 +65,24 @@ public class GoombaAI : MonoBehaviour
             }
             if (po.collisions.left) dirx = 1;
             else if (po.collisions.right) dirx = -1;
+
+            // hit bullet
+
+            bool hitBullet = po.CheckHorizontal(LayerMask.GetMask("bullet"));
+
+            if(hitBullet)
+            {
+                health.Hurt();
+                GetHurt();
+            }
+
             //physics shit
             po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;
             po.Move(po.velocity * Time.deltaTime);
+        }
+        else
+        {
+
         }
     }
 }
