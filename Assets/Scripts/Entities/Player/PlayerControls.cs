@@ -32,8 +32,14 @@ public class PlayerControls : MonoBehaviour
     //controls
     bool left = false, right = false, up = false, down = false;
     bool jump = false, attack = false, jumprelease = false;
+    bool shoot = false;
 
     void GetHurt()
+    {
+
+    }
+
+    void Shoot()
     {
 
     }
@@ -47,6 +53,7 @@ public class PlayerControls : MonoBehaviour
         jumprelease = Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Z);
         up = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
         down = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+        shoot = Input.GetKeyDown(KeyCode.X);
         if(health.health == 0)
         {
             dead = true;
@@ -88,13 +95,20 @@ public class PlayerControls : MonoBehaviour
                 {
                     if (leftarm != null)
                     {
-                        if (!leftarm.animation.isPlaying && leftarm.animationName != "armed")
+                        if (leftarm.animation.isCompleted && leftarm.animationName != "armed")
                             leftarm.animation.Play("armed");
                     }
                     if (rightarm != null)
                     {
-                        if (!rightarm.animation.isPlaying && rightarm.animationName != "armed")
+                        if (rightarm.animation.isCompleted && rightarm.animationName != "armed")
                             rightarm.animation.Play("armed");
+                    }
+                    if (shoot)
+                    {
+                        if(rightarm.animationName != "shoot")
+                            rightarm.animation.FadeIn("shoot",0.05f,1);
+                        if(leftarm.animationName != "shoot")
+                            leftarm.animation.FadeIn("shoot",0.05f,1);
                     }
                     if (leftshoulder != null && rightshoulder != null)
                     {
