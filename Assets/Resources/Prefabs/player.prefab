@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 114841092898948226}
   - component: {fileID: 70203991745331516}
   - component: {fileID: 23335167458066342}
+  - component: {fileID: 114431801350205592}
   m_Layer: 8
   m_Name: player
   m_TagString: Player
@@ -1882,6 +1883,18 @@ MonoBehaviour:
   - Revolver
   - left hand
   dirty: 0
+--- !u!114 &114431801350205592
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1555027452396312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c39c21c118440a469cf25e20422c03c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
 --- !u!114 &114578636480915982
 MonoBehaviour:
   m_ObjectHideFlags: 1

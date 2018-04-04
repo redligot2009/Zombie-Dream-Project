@@ -54,6 +54,37 @@ public class PhysicsObject : MonoBehaviour
         transform.Translate(velocity);
     }
 
+    public bool CheckHorizontal(LayerMask layer, float padding = 0.0f)
+    {
+        float directionX = Mathf.Sign(velocity.x);
+        float rayLength = skinDist + padding;
+
+        for (int i = 0; i < horizontalRayCount; i++)
+        {
+            Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
+            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, layer);
+            Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
+            if (hit) return true;
+        }
+        return false;
+    }
+
+    public bool CheckVertical(LayerMask layer, float padding = 0.0f)
+    {
+        float directionY = Mathf.Sign(velocity.y);
+        float rayLength = skinDist + padding;
+        for (int i = 0; i < verticalRayCount; i++)
+        {
+            Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
+            rayOrigin += Vector2.right * (verticalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, layer);
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
+            if (hit) return true;
+        }
+        return false;
+    }
+
     void HorizontalCollisions(ref Vector2 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
