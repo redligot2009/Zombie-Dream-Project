@@ -502,7 +502,7 @@ TextureImporter:
       name: verticalplatformtop
       rect:
         serializedVersion: 2
-        x: 385
+        x: 384
         y: 352
         width: 64
         height: 64
