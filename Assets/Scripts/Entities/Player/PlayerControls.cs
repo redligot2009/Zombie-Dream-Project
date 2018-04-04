@@ -10,10 +10,14 @@ public class PlayerControls : MonoBehaviour
     public float jumpSpeed = 8f, moveSpeed = 8f;
     //UnityEngine.Transform anim;
     UnityArmatureComponent anim, leftarm = null, rightarm = null;
+    //UnityArmatureComponent righthand;
     Vector2 input;
     Bone rightshoulder, leftshoulder;
+    Bone weaponend;
 
     public Health health;
+
+    public GameObject bullet;
 
     void Start()
     {
@@ -24,6 +28,7 @@ public class PlayerControls : MonoBehaviour
         rightarm = anim.transform.Find("rightarm (rightarm)").GetComponent<UnityArmatureComponent>();
         rightshoulder = rightarm.armature.GetBone("right_shoulder");
         leftshoulder = leftarm.armature.GetBone("left_shoulder");
+        weaponend = rightshoulder.armature.GetBone("arm").armature.GetBone("weaponend");
         health = GetComponent<Health>();
     }
 
@@ -43,6 +48,8 @@ public class PlayerControls : MonoBehaviour
     {
 
     }
+
+    int facing = 1;
 
     void Update()
     {
@@ -103,12 +110,16 @@ public class PlayerControls : MonoBehaviour
                         if (rightarm.animation.isCompleted && rightarm.animationName != "armed")
                             rightarm.animation.Play("armed");
                     }
+                    //shoot logic
                     if (shoot)
                     {
                         if(rightarm.animationName != "shoot")
                             rightarm.animation.FadeIn("shoot",0.05f,1);
                         if(leftarm.animationName != "shoot")
                             leftarm.animation.FadeIn("shoot",0.05f,1);
+                        GameObject go = Instantiate(bullet);
+                        go.transform.position = new Vector3(transform.position.x + facing * (po.coll.bounds.size.x / 2), leftarm.transform.position.y);
+                        go.transform.eulerAngles = new Vector3(0, (facing==1?0:180), -rightshoulder.offset.rotation * Mathf.Rad2Deg);
                     }
                     if (leftshoulder != null && rightshoulder != null)
                     {
@@ -146,13 +157,17 @@ public class PlayerControls : MonoBehaviour
                 if (po.velocity.x >= 0)
                 {
                     anim.armature.flipX = false;
+                    facing = 1;
                 }
                 else
                 {
                     anim.armature.flipX = true;
+                    facing = -1;
                 }
+                //animations player
                 if (po.collisions.below)
                 {
+                    //run
                     if (Mathf.Abs(po.velocity.x) > 0.5f)
                     {
                         if (anim.animation.lastAnimationName != "run")
@@ -162,6 +177,7 @@ public class PlayerControls : MonoBehaviour
                     }
                     else
                     {
+                    //idle
                         if (anim.animation.lastAnimationName != "idle")
                         {
                             anim.animation.FadeIn("idle", 0.1f, -1, 0);
@@ -172,6 +188,7 @@ public class PlayerControls : MonoBehaviour
                 {
                     if (po.velocity.y >= 0)
                     {
+                    //jump
                         if (anim.animation.lastAnimationName != "jump")
                         {
                             anim.animation.FadeIn("jump", 0.1f, -1, 0);
@@ -179,6 +196,7 @@ public class PlayerControls : MonoBehaviour
                     }
                     else
                     {
+                    //fall
                         if (anim.animation.lastAnimationName != "fall")
                         {
                             anim.animation.FadeIn("fall", 0.1f, -1, 0);
