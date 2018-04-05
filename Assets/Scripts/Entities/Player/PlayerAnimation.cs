@@ -12,9 +12,11 @@ public class PlayerAnimation : MonoBehaviour {
     Vector2 input;
     [HideInInspector]
     public Bone rightshoulder;
+    [HideInInspector]
     public Bone leftshoulder;
     [HideInInspector]
     public Bone weaponend;
+    public UnityEngine.Transform righthand;
     PlayerControls controls;
 
 
@@ -29,6 +31,7 @@ public class PlayerAnimation : MonoBehaviour {
         rightshoulder = rightarm.armature.GetBone("right_shoulder");
         leftshoulder = leftarm.armature.GetBone("left_shoulder");
         weaponend = rightshoulder.armature.GetBone("arm").armature.GetBone("weaponend");
+        righthand = rightarm.transform.Find("left hand").GetComponent<UnityEngine.Transform>();
     }
 	
 	void Update ()
@@ -92,12 +95,12 @@ public class PlayerAnimation : MonoBehaviour {
                     if (leftshoulder != null && rightshoulder != null)
                         leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
                 }
-                if (po.velocity.x >= 0)
+                if (po.velocity.x > 0 && controls.right)
                 {
                     anim.armature.flipX = false;
                     controls.facing = 1;
                 }
-                else
+                else if(po.velocity.x < 0 && controls.left)
                 {
                     anim.armature.flipX = true;
                     controls.facing = -1;
