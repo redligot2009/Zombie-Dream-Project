@@ -12,8 +12,7 @@ public class GoombaAI : MonoBehaviour
     private enum EnemyState
     {
         walking,
-        falling,
-        dead
+        falling
     }
 
     private EnemyState state = EnemyState.falling;
@@ -34,11 +33,7 @@ public class GoombaAI : MonoBehaviour
 
 	void Update ()
     {
-        if (health.health == 0)
-        {
-            state = EnemyState.dead;
-        }
-        if (state != EnemyState.dead)
+        if (!health.dead)
         {
             if (po.collisions.below || po.collisions.above)
             {
@@ -50,18 +45,15 @@ public class GoombaAI : MonoBehaviour
             if (state == EnemyState.falling)
             {
             }
-            if (state == EnemyState.walking || state != EnemyState.walking && po.gravityModifier == 0)
+            if (dirx == -1)
             {
-                if (dirx == -1)
-                {
-                    po.velocity.x = -moveSpeed.x;
-                    scale.x = -1;
-                }
-                else
-                {
-                    po.velocity.x = moveSpeed.x;
-                    scale.x = 1;
-                }
+                po.velocity.x = -moveSpeed.x;
+                scale.x = -1;
+            }
+            else
+            {
+                po.velocity.x = moveSpeed.x;
+                scale.x = 1;
             }
             if (po.collisions.left) dirx = 1;
             else if (po.collisions.right) dirx = -1;
@@ -74,14 +66,15 @@ public class GoombaAI : MonoBehaviour
             {
                 health.Hurt();
             }
-
-            //physics shit
-            po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;
-            po.Move(po.velocity * Time.deltaTime);
+            
         }
         else
         {
-
+            po.velocity.x = Mathf.Lerp(po.velocity.x, 0, Time.deltaTime * 5f);
+            po.gravityModifier = 1;
         }
+        //physics shit
+        po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;
+        po.Move(po.velocity * Time.deltaTime);
     }
 }

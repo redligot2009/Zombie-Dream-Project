@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour {
 
     public int health = 3;
-
+    public bool dead = false;
     public float hitTimer = 0;
     public float hitTimerDelay = 1f;
 
@@ -20,6 +20,7 @@ public class Health : MonoBehaviour {
         {
             hitTimer -= Time.deltaTime;
         }
+        dead = health <= 0;
     }
 
     public void Hurt(int damage = 1)
