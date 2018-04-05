@@ -34,7 +34,7 @@ public class PlayerControls : MonoBehaviour
     public void Shoot()
     {
         GameObject go = Instantiate(bullet);
-        go.transform.position = new Vector3(transform.position.x + facing * (po.coll.bounds.size.x / 2), playerAnimation.righthand.transform.position.y);
+        go.transform.position = new Vector3(playerAnimation.righthand.transform.position.x, playerAnimation.righthand.transform.position.y);
         go.transform.eulerAngles = new Vector3(0, (facing == 1 ? 0 : 180), -playerAnimation.rightshoulder.offset.rotation * Mathf.Rad2Deg);
     }
 

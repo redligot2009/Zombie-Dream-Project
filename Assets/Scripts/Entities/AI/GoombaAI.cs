@@ -8,14 +8,6 @@ public class GoombaAI : MonoBehaviour
 
     public Vector2 moveSpeed = new Vector2(5,5);
     PhysicsObject po;
-
-    private enum EnemyState
-    {
-        walking,
-        falling
-    }
-
-    private EnemyState state = EnemyState.falling;
     
     public Health health;
 
@@ -37,10 +29,6 @@ public class GoombaAI : MonoBehaviour
         {
             Vector3 pos = transform.localPosition;
             Vector3 scale = transform.localScale;
-            if(po.collisions.below) state = EnemyState.walking;
-            if (state == EnemyState.falling)
-            {
-            }
             if (dirx == -1)
             {
                 po.velocity.x = Mathf.Lerp(po.velocity.x,-moveSpeed.x,Time.deltaTime*2f);
