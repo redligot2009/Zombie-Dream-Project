@@ -73,7 +73,6 @@ public class GoombaAI : MonoBehaviour
             if(hitBullet)
             {
                 health.Hurt();
-                GetHurt();
             }
 
             //physics shit
