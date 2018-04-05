@@ -15,6 +15,8 @@ public class PlayerControls : MonoBehaviour
     Bone rightshoulder, leftshoulder;
     Bone weaponend;
 
+    public float bounceVelocity = 5f;
+
     public Health health;
 
     public GameObject bullet;
@@ -39,14 +41,11 @@ public class PlayerControls : MonoBehaviour
     bool jump = false, attack = false, jumprelease = false;
     bool shoot = false;
 
-    void GetHurt()
-    {
-
-    }
-
     void Shoot()
     {
-
+        GameObject go = Instantiate(bullet);
+        go.transform.position = new Vector3(transform.position.x + facing * (po.coll.bounds.size.x / 2), leftarm.transform.position.y);
+        go.transform.eulerAngles = new Vector3(0, (facing == 1 ? 0 : 180), -rightshoulder.offset.rotation * Mathf.Rad2Deg);
     }
 
     int facing = 1;
@@ -113,13 +112,11 @@ public class PlayerControls : MonoBehaviour
                     //shoot logic
                     if (shoot)
                     {
+                        Shoot();
                         if(rightarm.animationName != "shoot")
                             rightarm.animation.FadeIn("shoot",0.05f,1);
                         if(leftarm.animationName != "shoot")
                             leftarm.animation.FadeIn("shoot",0.05f,1);
-                        GameObject go = Instantiate(bullet);
-                        go.transform.position = new Vector3(transform.position.x + facing * (po.coll.bounds.size.x / 2), leftarm.transform.position.y);
-                        go.transform.eulerAngles = new Vector3(0, (facing==1?0:180), -rightshoulder.offset.rotation * Mathf.Rad2Deg);
                     }
                     if (leftshoulder != null && rightshoulder != null)
                     {
@@ -210,21 +207,32 @@ public class PlayerControls : MonoBehaviour
 
             if(hitToxicWaste)
             {
-                health.Hurt();
+                health.Hurt(100);
             }
 
             //hit enemy
 
-            bool hitEnemy = po.CheckHorizontal(LayerMask.GetMask("enemy"));
+            RaycastHit2D hitEnemy = po.CheckHorizontalHit(LayerMask.GetMask("enemy"));
             bool hitEnemyBounce = po.CheckVertical(LayerMask.GetMask("enemy"),0.25f);
 
             if(hitEnemy)
             {
+                if (health.hitTimer <= 0)
+                {
+                    if (hitEnemy.point.x >= transform.position.x)
+                    {
+                        po.velocity.x = -bounceVelocity;
+                    }
+                    else
+                    {
+                        po.velocity.x = bounceVelocity;
+                    }
+                }
                 health.Hurt();
             }
             else
             {
-                if (hitEnemyBounce)
+                if (hitEnemyBounce && !po.collisions.below)
                 {
                     po.velocity.y = jumpSpeed;
                 }

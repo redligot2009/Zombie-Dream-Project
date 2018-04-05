@@ -70,6 +70,22 @@ public class PhysicsObject : MonoBehaviour
         return false;
     }
 
+    public RaycastHit2D CheckHorizontalHit(LayerMask layer, float padding = 0.0f, float dirx=0)
+    {
+        float directionX = (dirx==0?Mathf.Sign(velocity.x):dirx);
+        float rayLength = skinDist + padding;
+
+        for (int i = 0; i < horizontalRayCount; i++)
+        {
+            Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
+            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, layer);
+            Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
+            if (hit) return hit;
+        }
+        return new RaycastHit2D();
+    }
+
     public bool CheckVertical(LayerMask layer, float padding = 0.0f)
     {
         float directionY = Mathf.Sign(velocity.y);
