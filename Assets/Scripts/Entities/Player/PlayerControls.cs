@@ -209,7 +209,7 @@ public class PlayerControls : MonoBehaviour
             //hit enemy
 
             RaycastHit2D hitEnemy = po.CheckHorizontalHit(LayerMask.GetMask("enemy"));
-            RaycastHit2D hitEnemyBounce = po.CheckVerticalHit(LayerMask.GetMask("enemy"),0.25f);
+            RaycastHit2D hitEnemyBounce = po.CheckVerticalHit(LayerMask.GetMask("enemy"),0.15f);
 
             //hit enemy damage player
             if(hitEnemy)

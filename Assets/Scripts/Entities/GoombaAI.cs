@@ -35,10 +35,6 @@ public class GoombaAI : MonoBehaviour
     {
         if (!health.dead)
         {
-            if (po.collisions.below || po.collisions.above)
-            {
-                po.velocity.y = 0;
-            }
             Vector3 pos = transform.localPosition;
             Vector3 scale = transform.localScale;
             if(po.collisions.below) state = EnemyState.walking;
@@ -47,23 +43,52 @@ public class GoombaAI : MonoBehaviour
             }
             if (dirx == -1)
             {
-                po.velocity.x = -moveSpeed.x;
+                po.velocity.x = Mathf.Lerp(po.velocity.x,-moveSpeed.x,Time.deltaTime*2f);
                 scale.x = -1;
             }
             else
             {
-                po.velocity.x = moveSpeed.x;
+                po.velocity.x = Mathf.Lerp(po.velocity.x,moveSpeed.x,Time.deltaTime*2f);
                 scale.x = 1;
             }
-            if (po.collisions.left) dirx = 1;
-            else if (po.collisions.right) dirx = -1;
+            if (po.collisions.left)
+            {
+                po.velocity.x = moveSpeed.x;
+                dirx = 1;
+            }
+            else if (po.collisions.right)
+            {
+                po.velocity.x = -moveSpeed.x;
+                dirx = -1;
+            }
 
             // hit bullet
 
-            bool hitBullet = po.CheckHorizontal(LayerMask.GetMask("bullet"));
+            RaycastHit2D hitBullet = po.CheckBoxHit(LayerMask.GetMask("bullet"));
 
             if(hitBullet)
             {
+                if (health.hitTimer <= 0)
+                {
+                    if (hitBullet.point.y > po.coll.bounds.max.y - 0.15f)
+                    {
+                        po.velocity.x = 0f;
+                    }
+                    else
+                    {
+                        Debug.Log(hitBullet.point.y.ToString() + " vs. " + po.coll.bounds.max.y);
+                        
+                        if (hitBullet.point.x >= transform.position.x)
+                        {
+                            po.velocity.x = -5f;
+                        }
+                        else
+                        {
+                            po.velocity.x = 5f;
+                        }
+                    }
+                    Destroy(hitBullet.transform.gameObject);
+                }
                 health.Hurt();
             }
             
@@ -72,6 +97,10 @@ public class GoombaAI : MonoBehaviour
         {
             po.velocity.x = Mathf.Lerp(po.velocity.x, 0, Time.deltaTime * 5f);
             po.gravityModifier = 1;
+        }
+        if (po.collisions.below || po.collisions.above)
+        {
+            po.velocity.y = 0;
         }
         //physics shit
         po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;

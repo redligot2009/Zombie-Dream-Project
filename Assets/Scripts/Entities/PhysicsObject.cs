@@ -115,6 +115,13 @@ public class PhysicsObject : MonoBehaviour
         return new RaycastHit2D();
     }
 
+    public RaycastHit2D CheckBoxHit(LayerMask layer, float padding = 0.0f)
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, coll.bounds.size, 0, Vector2.one ,padding,layer);
+        if (hit) return hit;
+        return new RaycastHit2D();
+    }
+
     void HorizontalCollisions(ref Vector2 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);

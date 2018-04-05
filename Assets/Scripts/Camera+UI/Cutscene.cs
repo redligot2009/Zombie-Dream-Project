@@ -25,7 +25,7 @@ public class Cutscene : MonoBehaviour {
 	
 	void Update () {
         //control frames
-		if(Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             PrevFrame();
         }

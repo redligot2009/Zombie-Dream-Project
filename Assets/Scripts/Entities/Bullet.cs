@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour {
     {
         return mask == (mask | (1 << layer));
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("YO");
