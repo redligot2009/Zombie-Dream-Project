@@ -34,7 +34,7 @@ public class PlayerControls : MonoBehaviour
         health = GetComponent<Health>();
     }
 
-    bool armed = true, dead = false;
+    bool armed = true;
 
     //controls
     bool left = false, right = false, up = false, down = false;
@@ -60,11 +60,7 @@ public class PlayerControls : MonoBehaviour
         up = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
         down = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
         shoot = Input.GetKeyDown(KeyCode.X);
-        if(health.health == 0)
-        {
-            dead = true;
-        }
-        if (!dead)
+        if (!health.dead)
         {
             //hit ground
             if (po.collisions.below || po.collisions.above)
@@ -213,28 +209,38 @@ public class PlayerControls : MonoBehaviour
             //hit enemy
 
             RaycastHit2D hitEnemy = po.CheckHorizontalHit(LayerMask.GetMask("enemy"));
-            bool hitEnemyBounce = po.CheckVertical(LayerMask.GetMask("enemy"),0.25f);
+            RaycastHit2D hitEnemyBounce = po.CheckVerticalHit(LayerMask.GetMask("enemy"),0.25f);
 
+            //hit enemy damage player
             if(hitEnemy)
             {
-                if (health.hitTimer <= 0)
+                Health enemyHealth = hitEnemy.transform.GetComponent<Health>();
+                if (!enemyHealth.dead)
                 {
-                    if (hitEnemy.point.x >= transform.position.x)
+                    if (health.hitTimer <= 0)
                     {
-                        po.velocity.x = -bounceVelocity;
+                        if (hitEnemy.point.x >= transform.position.x)
+                        {
+                            po.velocity.x = -bounceVelocity;
+                        }
+                        else
+                        {
+                            po.velocity.x = bounceVelocity;
+                        }
                     }
-                    else
-                    {
-                        po.velocity.x = bounceVelocity;
-                    }
+                    health.Hurt();
                 }
-                health.Hurt();
             }
             else
             {
+                //hit enemy damage enemy
                 if (hitEnemyBounce && !po.collisions.below)
                 {
-                    po.velocity.y = jumpSpeed;
+                    Health enemyHealth = hitEnemyBounce.transform.GetComponent<Health>();
+                    if (!enemyHealth.dead)
+                    {
+                        po.velocity.y = jumpSpeed;
+                    }
                 }
             }
 

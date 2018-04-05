@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61529226698016944}
   - component: {fileID: 114268008032774284}
   - component: {fileID: 50251574080414122}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,4 +144,5 @@ MonoBehaviour:
   tileLayers:
     serializedVersion: 2
     m_Bits: 2560
+  lifeTime: 2
   moveSpeed: 15
