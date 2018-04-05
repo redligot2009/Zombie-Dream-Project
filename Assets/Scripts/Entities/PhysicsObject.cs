@@ -100,9 +100,9 @@ public class PhysicsObject : MonoBehaviour
         }
         return false;
     }
-    public RaycastHit2D CheckVerticalHit(LayerMask layer, float padding = 0.0f)
+    public RaycastHit2D CheckVerticalHit(LayerMask layer, float padding = 0.0f, float dirx = 0)
     {
-        float directionY = Mathf.Sign(velocity.y);
+        float directionY = (dirx==0?Mathf.Sign(velocity.y):dirx);
         float rayLength = skinDist + padding;
         for (int i = 0; i < verticalRayCount; i++)
         {

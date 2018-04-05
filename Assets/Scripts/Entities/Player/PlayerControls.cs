@@ -209,37 +209,38 @@ public class PlayerControls : MonoBehaviour
             //hit enemy
 
             RaycastHit2D hitEnemy = po.CheckHorizontalHit(LayerMask.GetMask("enemy"));
-            RaycastHit2D hitEnemyBounce = po.CheckVerticalHit(LayerMask.GetMask("enemy"),0.15f);
+            RaycastHit2D hitEnemyBounce = po.CheckVerticalHit(LayerMask.GetMask("enemy"),0.2f,-1);
 
-            //hit enemy damage player
-            if(hitEnemy)
+            //hit enemy damage enemy
+            if (hitEnemyBounce && !po.collisions.below && (po.coll.bounds.min.y-hitEnemyBounce.transform.position.y) >= po.coll.bounds.extents.y - po.skinDist && po.velocity.y <= 0)
             {
-                Health enemyHealth = hitEnemy.transform.GetComponent<Health>();
+                Health enemyHealth = hitEnemyBounce.transform.GetComponent<Health>();
                 if (!enemyHealth.dead)
                 {
-                    if (health.hitTimer <= 0)
-                    {
-                        if (hitEnemy.point.x >= transform.position.x)
-                        {
-                            po.velocity.x = -bounceVelocity;
-                        }
-                        else
-                        {
-                            po.velocity.x = bounceVelocity;
-                        }
-                    }
-                    health.Hurt();
+                    po.velocity.y = jumpSpeed;
+                    enemyHealth.Hurt();
                 }
             }
             else
             {
-                //hit enemy damage enemy
-                if (hitEnemyBounce && !po.collisions.below)
+                //hit enemy damage player
+                if (hitEnemy)
                 {
-                    Health enemyHealth = hitEnemyBounce.transform.GetComponent<Health>();
+                    Health enemyHealth = hitEnemy.transform.GetComponent<Health>();
                     if (!enemyHealth.dead)
                     {
-                        po.velocity.y = jumpSpeed;
+                        if (health.hitTimer <= 0)
+                        {
+                            if (hitEnemy.point.x >= transform.position.x)
+                            {
+                                po.velocity.x = -bounceVelocity;
+                            }
+                            else
+                            {
+                                po.velocity.x = bounceVelocity;
+                            }
+                        }
+                        health.Hurt();
                     }
                 }
             }

@@ -76,7 +76,7 @@ public class GoombaAI : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log(hitBullet.point.y.ToString() + " vs. " + po.coll.bounds.max.y);
+                        //Debug.Log(hitBullet.point.y.ToString() + " vs. " + po.coll.bounds.max.y);
                         
                         if (hitBullet.point.x >= transform.position.x)
                         {
