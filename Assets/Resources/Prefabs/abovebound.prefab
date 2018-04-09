@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23249926211251592}
   - component: {fileID: 61606713302224148}
   - component: {fileID: 114728630158460354}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: abovebound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1117858033301560}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.343878, y: 9.93416, z: 1.9543478}
+  m_LocalPosition: {x: -1.0935426, y: 15.01, z: 1.9543478}
   m_LocalScale: {x: 2.493224, y: 2.4948797, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,6 +52,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -67,6 +68,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
