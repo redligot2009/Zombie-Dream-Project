@@ -86,7 +86,7 @@ public class PlayerControls : MonoBehaviour
             }
 
             //hit toxic waste
-            bool hitToxicWaste = po.CheckHorizontal(LayerMask.GetMask("hazard")) || po.CheckVertical(LayerMask.GetMask("hazard"));
+            bool hitToxicWaste = po.CheckHorizontal(LayerMask.GetMask("hazard"),0.25f) || po.CheckVertical(LayerMask.GetMask("hazard"),0.25f);
             if(hitToxicWaste)
             {
                 health.Hurt(100);
