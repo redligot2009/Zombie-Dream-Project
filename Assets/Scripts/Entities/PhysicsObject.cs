@@ -54,9 +54,9 @@ public class PhysicsObject : MonoBehaviour
         transform.Translate(velocity);
     }
 
-    public bool CheckHorizontal(LayerMask layer, float padding = 0.0f)
+    public bool CheckHorizontal(LayerMask layer, float padding = 0.0f, float dirx=0)
     {
-        float directionX = Mathf.Sign(velocity.x);
+        float directionX = (dirx==0?Mathf.Sign(velocity.x):dirx);
         float rayLength = skinDist + padding;
 
         for (int i = 0; i < horizontalRayCount; i++)
@@ -86,9 +86,9 @@ public class PhysicsObject : MonoBehaviour
         return new RaycastHit2D();
     }
 
-    public bool CheckVertical(LayerMask layer, float padding = 0.0f)
+    public bool CheckVertical(LayerMask layer, float padding = 0.0f, float diry = 0)
     {
-        float directionY = Mathf.Sign(velocity.y);
+        float directionY = (diry != 0?Mathf.Sign(velocity.y):diry);
         float rayLength = skinDist + padding;
         for (int i = 0; i < verticalRayCount; i++)
         {

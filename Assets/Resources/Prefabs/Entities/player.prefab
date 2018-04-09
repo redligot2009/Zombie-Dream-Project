@@ -2016,7 +2016,7 @@ MonoBehaviour:
   maxDescendAngle: 80
   collisionMask:
     serializedVersion: 2
-    m_Bits: 2560
+    m_Bits: 512
   skinDist: 0.05
   hopThreshold: 0.1
   horizontalRayCount: 8
