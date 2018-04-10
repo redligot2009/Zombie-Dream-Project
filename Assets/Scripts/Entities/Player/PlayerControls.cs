@@ -98,7 +98,7 @@ public class PlayerControls : MonoBehaviour
 
             //hit enemy
             RaycastHit2D hitEnemy = po.CheckHorizontalHit(LayerMask.GetMask("enemy"));
-            RaycastHit2D hitEnemyBounce = po.CheckVerticalHit(LayerMask.GetMask("enemy"),0.2f,-1);
+            RaycastHit2D hitEnemyBounce = po.CheckVerticalHit(LayerMask.GetMask("enemy"),0.22f,-1);
 
             //hit enemy damage enemy
             if (hitEnemyBounce && !po.collisions.below && (po.coll.bounds.min.y-hitEnemyBounce.transform.position.y) >= po.coll.bounds.extents.y - po.skinDist && po.velocity.y <= 0)
@@ -110,10 +110,8 @@ public class PlayerControls : MonoBehaviour
                     enemyHealth.Hurt();
                 }
             }
-            else
-            {
                 //hit enemy damage player
-                if (hitEnemy)
+                if (hitEnemy && hitEnemyBounce.collider == null)
                 {
                     Health enemyHealth = hitEnemy.transform.GetComponent<Health>();
                     if (!enemyHealth.dead)
@@ -132,7 +130,6 @@ public class PlayerControls : MonoBehaviour
                         health.Hurt();
                     }
                 }
-            }
 
             //physics shit
             po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;

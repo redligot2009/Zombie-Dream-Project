@@ -18,7 +18,8 @@ public class PlayerAnimation : MonoBehaviour {
     public Bone weaponend;
     public UnityEngine.Transform righthand;
     PlayerControls controls;
-
+    MeshRenderer[] renderers;
+    public Color hurtTint = Color.red;
 
     void Start ()
     {
@@ -32,10 +33,40 @@ public class PlayerAnimation : MonoBehaviour {
         leftshoulder = leftarm.armature.GetBone("left_shoulder");
         weaponend = rightshoulder.armature.GetBone("arm").armature.GetBone("weaponend");
         righthand = rightarm.transform.Find("left hand").GetComponent<UnityEngine.Transform>();
+        renderers = anim.GetComponentsInChildren<MeshRenderer>();
+
     }
 	
+    void FadeAnimation(string name, UnityArmatureComponent obj=null, int layer=0, float fadeTime=0.1f,int playTimes=-1)
+    {
+        if (obj == null) obj = anim;
+        if (obj != null)
+        {
+            if (obj.animation.GetState(name) == null)
+            {
+                obj.animation.FadeIn(name, fadeTime, playTimes, layer);
+            }
+        }
+    }
+
 	void Update ()
     {
+        if (controls.health.hitTimer > 0)
+        {
+            foreach (var renderer in renderers)
+            {
+                Color c = hurtTint;
+                renderer.material.color = Color.Lerp(renderer.material.color,c,Time.deltaTime*5f);
+            }
+        }
+        else
+        {
+            foreach (var renderer in renderers)
+            {
+                Color c = Color.white;
+                renderer.material.color = Color.Lerp(renderer.material.color, c, Time.deltaTime * 5f);
+            }
+        }
         //gun armature
         if (!controls.health.dead)
         {
@@ -43,23 +74,15 @@ public class PlayerAnimation : MonoBehaviour {
             {
                 if (controls.armed)
                 {
-                    if (leftarm != null)
-                    {
-                        if (leftarm.animation.isCompleted && leftarm.animationName != "armed")
-                            leftarm.animation.Play("armed");
-                    }
-                    if (rightarm != null)
-                    {
-                        if (rightarm.animation.isCompleted && rightarm.animationName != "armed")
-                            rightarm.animation.Play("armed");
-                    }
+                    if (leftarm.animation.isCompleted && leftarm.animationName != "armed")
+                        leftarm.animation.Play("armed");
+                    if (rightarm.animation.isCompleted && rightarm.animationName != "armed")
+                        rightarm.animation.Play("armed");
                     //shoot logic
                     if (controls.shoot)
                     {
-                        if (rightarm.animationName != "shoot")
-                            rightarm.animation.FadeIn("shoot", 0.05f, 1);
-                        if (leftarm.animationName != "shoot")
-                            leftarm.animation.FadeIn("shoot", 0.05f, 1);
+                        FadeAnimation("shoot", rightarm, 1, 0.05f,1);
+                        FadeAnimation("shoot", leftarm, 1, 0.05f,1);
                     }
                     //shoot rotation logic
                     if (leftshoulder != null && rightshoulder != null)
@@ -71,7 +94,6 @@ public class PlayerAnimation : MonoBehaviour {
                         }
                         else if (controls.down)
                         {
-                            leftshoulder.offset.rotation = Mathf.Deg2Rad * 85;
                             leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 45;
                         }
                         else
@@ -111,18 +133,12 @@ public class PlayerAnimation : MonoBehaviour {
                     //run
                     if (Mathf.Abs(po.velocity.x) > 0.5f)
                     {
-                        if (anim.animation.lastAnimationName != "run")
-                        {
-                            anim.animation.FadeIn("run", 0.1f, -1, 0);
-                        }
+                        FadeAnimation("run");
                     }
                     else
                     {
                         //idle
-                        if (anim.animation.lastAnimationName != "idle")
-                        {
-                            anim.animation.FadeIn("idle", 0.1f, -1, 0);
-                        }
+                        FadeAnimation("idle");
                     }
                 }
                 else
@@ -130,26 +146,22 @@ public class PlayerAnimation : MonoBehaviour {
                     if (po.velocity.y >= 0)
                     {
                         //jump
-                        if (anim.animation.lastAnimationName != "jump")
-                        {
-                            anim.animation.FadeIn("jump", 0.1f, -1, 0);
-                        }
+                        FadeAnimation("jump");
                     }
                     else
                     {
                         //fall
-                        if (anim.animation.lastAnimationName != "fall")
-                        {
-                            anim.animation.FadeIn("fall", 0.1f, -1, 0);
-                        }
+                        FadeAnimation("fall");
                     }
                 }
             }
         }
         else
         {
-            leftarm.animation.FadeIn("unarmed", 0.1f);
-            rightarm.animation.FadeIn("unarmed", 0.1f);
+            FadeAnimation("death",anim,0,0f,1);
+            leftshoulder.offset.rotation = rightshoulder.offset.rotation = Mathf.Deg2Rad * 0;
+            FadeAnimation("unarmed", leftarm, 1, 0.1f, 1);
+            FadeAnimation("unarmed", rightarm, 1, 0.1f, 1);
         }
     }
 }
