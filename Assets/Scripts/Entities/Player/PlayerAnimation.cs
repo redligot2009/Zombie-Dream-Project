@@ -14,29 +14,53 @@ public class PlayerAnimation : MonoBehaviour {
     public Bone rightshoulder;
     [HideInInspector]
     public Bone leftshoulder;
-    [HideInInspector]
-    public Bone weaponend;
     public UnityEngine.Transform righthand;
+    public UnityEngine.Transform weapon_end;
     PlayerControls controls;
     MeshRenderer[] renderers;
     public Color hurtTint = Color.red;
-
+    List<Bone> weapons = new List<Bone>();
+    Bone weaponbone;
     void Start ()
     {
         po = GetComponent<PhysicsObject>();
         controls = GetComponent<PlayerControls>();
-        //anim = GameObject.Find("anim").GetComponent<UnityEngine.Transform>();
+        //find main armature
         anim = transform.Find("anim").GetComponent<UnityArmatureComponent>();
+        //find left and right arm armatures
         leftarm = anim.transform.Find("leftarm (leftarm)").GetComponent<UnityArmatureComponent>();
         rightarm = anim.transform.Find("rightarm (rightarm)").GetComponent<UnityArmatureComponent>();
+        //find shoulders
         rightshoulder = rightarm.armature.GetBone("right_shoulder");
         leftshoulder = leftarm.armature.GetBone("left_shoulder");
-        weaponend = rightshoulder.armature.GetBone("arm").armature.GetBone("weaponend");
         righthand = rightarm.transform.Find("left hand").GetComponent<UnityEngine.Transform>();
         renderers = anim.GetComponentsInChildren<MeshRenderer>();
-
+        weaponbone = rightshoulder.armature.GetBone("arm").armature.GetBone("left hand").armature.GetBone("weapon");
+        foreach (Bone weapon in rightarm.armature.GetBones())
+        {
+            if (weapon != null && weapon.parent == weaponbone)
+            {
+                weapons.Add(weapon);
+            }
+        }
+        UpdateWeaponVisibility();
     }
-	
+
+    void UpdateWeaponVisibility()
+    {
+        foreach (Bone weapon in weapons)
+        {
+            if (controls.currentWeapon == null || weapon.name != controls.currentWeapon.weaponName)
+            {
+                weapon.visible = false;
+            }
+            else
+            {
+                weapon.visible = true;
+            }
+        }
+    }
+
     void FadeAnimation(string name, UnityArmatureComponent obj=null, int layer=0, float fadeTime=0.1f,int playTimes=-1)
     {
         if (obj == null) obj = anim;
@@ -48,9 +72,9 @@ public class PlayerAnimation : MonoBehaviour {
             }
         }
     }
-
 	void Update ()
     {
+        UpdateWeaponVisibility();
         if (controls.health.hitTimer > 0)
         {
             foreach (var renderer in renderers)
@@ -79,10 +103,10 @@ public class PlayerAnimation : MonoBehaviour {
                     if (rightarm.animation.isCompleted && rightarm.animationName != "armed")
                         rightarm.animation.Play("armed");
                     //shoot logic
-                    if (controls.shoot)
+                    if (controls.shoot && controls.shootTimer >= controls.shootDelay)
                     {
-                        FadeAnimation("shoot", rightarm, 1, 0.05f,1);
-                        FadeAnimation("shoot", leftarm, 1, 0.05f,1);
+                        FadeAnimation("shoot", rightarm, 1, 0f,1);
+                        FadeAnimation("shoot", leftarm, 1, 0f,1);
                     }
                     //shoot rotation logic
                     if (leftshoulder != null && rightshoulder != null)

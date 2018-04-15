@@ -9,6 +9,7 @@ public class Parallax : MonoBehaviour {
     Sprite bgsprite, bg2sprite;
     BoxCollider2D bgcoll, bg2coll;
     public float parallaxfactor = 0.15f;
+
     void Start () {
         position = transform.position;
         offset.y = position.y;
@@ -19,7 +20,7 @@ public class Parallax : MonoBehaviour {
         bg2sprite = bg2.GetComponent<Sprite>();
         bg2coll = bg2.GetComponent<BoxCollider2D>();
     }
-	void Update () {
+	void LateUpdate () {
         Vector2 cameraPos = Camera.main.transform.position;
         float cameraHalfWidth = Camera.main.orthographicSize * Camera.main.aspect;
         if (Camera.main != null)

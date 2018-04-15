@@ -56,6 +56,7 @@ public class GoombaAI : MonoBehaviour
 
             if(hitBullet)
             {
+                Bullet bullet = hitBullet.transform.GetComponent<Bullet>();
                 if (health.hitTimer <= 0)
                 {
                     if (hitBullet.point.y > po.coll.bounds.max.y - 0.15f)
@@ -77,7 +78,7 @@ public class GoombaAI : MonoBehaviour
                     }
                     Destroy(hitBullet.transform.gameObject);
                 }
-                health.Hurt();
+                health.Hurt(bullet.damage);
             }
             
         }

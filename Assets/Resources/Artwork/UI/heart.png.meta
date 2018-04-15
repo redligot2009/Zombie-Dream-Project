@@ -1,10 +1,14 @@
 fileFormatVersion: 2
-guid: 8f4f62c5a1d9f7f4095f503a310f7753
-timeCreated: 1522937247
+guid: c4ca486da3e322447bc2c7acda6907a6
+timeCreated: 1523632885
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Bullet-1_0
+    21300000: heart_0
+    21300002: heart_1
+    21300004: heart_2
+    21300006: heart_3
+    21300008: heart_4
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -81,15 +85,71 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bullet-1_0
+      name: heart_0
       rect:
         serializedVersion: 2
-        x: 52
-        y: 315
-        width: 38
-        height: 25
+        x: 1
+        y: 198
+        width: 57
+        height: 58
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: heart_1
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 198
+        width: 57
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: heart_2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 140
+        width: 57
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: heart_3
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 139
+        width: 57
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: heart_4
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 81
+        width: 57
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

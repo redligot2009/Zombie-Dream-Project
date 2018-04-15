@@ -15,6 +15,8 @@ public class PlayerControls : MonoBehaviour
     PlayerAnimation playerAnimation;
     public GameObject bullet;
 
+    public WeaponObject currentWeapon;
+
     void Start()
     {
         playerAnimation = GetComponent<PlayerAnimation>();
@@ -22,20 +24,60 @@ public class PlayerControls : MonoBehaviour
         health = GetComponent<Health>();
     }
 
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        //Debug.Log(LayerMask.LayerToName(collision.gameObject.layer));
+        if(collision.gameObject.layer == LayerMask.NameToLayer("enemy"))
+        {
+            Health enemyHealth = collision.transform.GetComponent<Health>();
+            if (!enemyHealth.dead)
+            {
+                if (health.hitTimer <= 0)
+                {
+                    if (collision.transform.position.x >= transform.position.x)
+                    {
+                        po.velocity.x = -bounceVelocity;
+                    }
+                    else
+                    {
+                        po.velocity.x = bounceVelocity;
+                    }
+                }
+                health.Hurt();
+            }
+        }
+    }
+
     public bool armed = true;
 
     //controls
+    [HideInInspector]
     public bool left = false, right = false, up = false, down = false;
+    [HideInInspector]
     public bool jump = false, attack = false, jumprelease = false;
+    [HideInInspector]
     public bool shoot = false;
     
     public int facing = 1;
 
+    public float shootTimer = 0;
+    public float shootDelay = 0.1f;
+    public float reloadTime = 1f;
+    public float reloadTimer = 0;
+    public float weaponDamage = 1f;
+    public int clipSize = 6;
+    public int currBullet = 1;
+
     public void Shoot()
     {
         GameObject go = Instantiate(bullet);
+        Bullet _bullet = go.GetComponent<Bullet>();
+        _bullet.damage = weaponDamage;
         go.transform.position = new Vector3(playerAnimation.righthand.transform.position.x, playerAnimation.righthand.transform.position.y);
         go.transform.eulerAngles = new Vector3(0, (facing == 1 ? 0 : 180), -playerAnimation.rightshoulder.offset.rotation * Mathf.Rad2Deg);
+        go.transform.position += 0.33f * go.transform.up;
+        go.transform.position += go.transform.right*0.75f;
+        currBullet++;
     }
 
     void Update()
@@ -78,12 +120,38 @@ public class PlayerControls : MonoBehaviour
                     po.velocity.y = po.velocity.y * 0.65f;
                 }
             }
+            /*Weapons Logic*/
 
-            //shoot logic
-            if(shoot)
+            //timers
+            if (shootTimer > 0)
             {
-                Shoot();
+                shootTimer -= Time.deltaTime;
             }
+            if (reloadTimer > 0)
+            {
+                reloadTimer -= Time.deltaTime;
+            }
+            if(currBullet > clipSize)
+            {
+                currBullet = 1;
+                reloadTimer = reloadTime;
+            }
+            if(currentWeapon != null && !armed)
+            {
+                shootDelay = currentWeapon.shootDelay;
+                reloadTime = currentWeapon.reloadTime;
+                armed = true;
+            }
+            if (armed)
+            {
+                if (shoot && shootTimer <= 0 && reloadTimer <= 0)
+                {
+                    shootTimer = shootDelay;
+                    Shoot();
+                }
+            }
+
+            /*End Weapons Logic*/
 
             //hit toxic waste
             bool hitToxicWaste = po.CheckHorizontal(LayerMask.GetMask("hazard"),0.15f,-1) ||
@@ -97,7 +165,8 @@ public class PlayerControls : MonoBehaviour
             }
 
             //hit enemy
-            RaycastHit2D hitEnemy = po.CheckHorizontalHit(LayerMask.GetMask("enemy"));
+            RaycastHit2D hitEnemy = po.CheckHorizontalHit(LayerMask.GetMask("enemy"),0,1);
+            if (!hitEnemy) hitEnemy = po.CheckHorizontalHit(LayerMask.GetMask("enemy"), -1);
             RaycastHit2D hitEnemyBounce = po.CheckVerticalHit(LayerMask.GetMask("enemy"),0.22f,-1);
 
             //hit enemy damage enemy
@@ -110,27 +179,6 @@ public class PlayerControls : MonoBehaviour
                     enemyHealth.Hurt();
                 }
             }
-                //hit enemy damage player
-                if (hitEnemy && hitEnemyBounce.collider == null)
-                {
-                    Health enemyHealth = hitEnemy.transform.GetComponent<Health>();
-                    if (!enemyHealth.dead)
-                    {
-                        if (health.hitTimer <= 0)
-                        {
-                            if (hitEnemy.point.x >= transform.position.x)
-                            {
-                                po.velocity.x = -bounceVelocity;
-                            }
-                            else
-                            {
-                                po.velocity.x = bounceVelocity;
-                            }
-                        }
-                        health.Hurt();
-                    }
-                }
-
             //physics shit
             po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;
             po.Move(po.velocity * Time.deltaTime);

@@ -32,6 +32,12 @@ public class CameraFollow : MonoBehaviour {
         levelMaxY = aboveBounds.position.y - aboveBoundsHeight - (camHeight / 2f);
     }
 	
+    public bool InCameraBounds(float x, float y)
+    {
+        return (x >= transform.position.x - camWidth/2 && x <= transform.position.x + camWidth/2) &&
+            (y >= transform.position.y - camHeight/2 && y <= transform.position.y + camHeight/2);
+    }
+
 	void Update ()
     {
         if (target)
