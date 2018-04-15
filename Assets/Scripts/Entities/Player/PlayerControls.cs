@@ -136,10 +136,11 @@ public class PlayerControls : MonoBehaviour
                 currBullet = 1;
                 reloadTimer = reloadTime;
             }
-            if(currentWeapon != null && !armed)
+            if(currentWeapon != null)
             {
                 shootDelay = currentWeapon.shootDelay;
                 reloadTime = currentWeapon.reloadTime;
+                clipSize = currentWeapon.clipSize;
                 armed = true;
             }
             if (armed)

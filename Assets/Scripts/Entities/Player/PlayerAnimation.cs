@@ -50,13 +50,13 @@ public class PlayerAnimation : MonoBehaviour {
     {
         foreach (Bone weapon in weapons)
         {
-            if (controls.currentWeapon == null || weapon.name != controls.currentWeapon.weaponName)
+            if (controls.currentWeapon != null && weapon.name == controls.currentWeapon.weaponName)
             {
-                weapon.visible = false;
+                weapon.visible = true;
             }
             else
             {
-                weapon.visible = true;
+                weapon.visible = false;
             }
         }
     }
