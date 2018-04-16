@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: AK47
   m_EditorClassIdentifier: 
   weaponName: AK47
-  damage: 3
-  shootDelay: 0.56
+  damage: 2
+  shootDelay: 0.135
   reloadTime: 3
   clipSize: 32

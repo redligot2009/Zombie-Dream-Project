@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2108210716, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
+  m_Name: START MENU GRADIENT
+  m_EditorClassIdentifier: 
+  topLeft: {r: 0.66176474, g: 0.009731844, b: 0.009731844, a: 1}
+  topRight: {r: 0.61764705, g: 0.022707596, b: 0.022707596, a: 1}
+  bottomLeft: {r: 0.27205884, g: 0.0020004346, b: 0.0020004346, a: 1}
+  bottomRight: {r: 0.20588237, g: 0, b: 0, a: 1}
