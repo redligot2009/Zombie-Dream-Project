@@ -16,5 +16,3 @@ MonoBehaviour:
   shootDelay: 0.135
   reloadTime: 3
   clipSize: 32
-  recoilVelocity: 2
-  triggerType: 1

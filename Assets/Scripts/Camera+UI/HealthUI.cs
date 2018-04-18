@@ -9,9 +9,8 @@ public class HealthUI : MonoBehaviour {
     public Sprite[] heartSprites;
     public List<GameObject> hearts;
     public float offsetX = 0;
-    public bool center = true;
 
-    void UpdateHeart(int idx, float health)
+    void updateHeart(int idx, float health)
     {
         int i = 0;
         for (float rem = 0; rem <= 1; rem += 0.25f, i++)
@@ -25,27 +24,24 @@ public class HealthUI : MonoBehaviour {
     }
     void Start () {
         health = target.GetComponent<Health>();
+        //Instantiate(, transform);
         float curr = health.health;
         int idx = 0;
         float heartWidth = heartSprites[0].bounds.size.x;
         float totalWidth = 0;
-        GameObject orig = new GameObject("heart", typeof(SpriteRenderer));
-        while (curr > 0)
+        while(curr > 0)
         {
-            GameObject heart = Instantiate(orig, transform);
+            GameObject heart = Instantiate(new GameObject(), transform);
+            heart.AddComponent<SpriteRenderer>();
             SpriteRenderer spriteRenderer = heart.GetComponent<SpriteRenderer>();
             totalWidth += heartWidth + offsetX;
             heart.transform.localPosition = new Vector3(idx * (heartWidth+offsetX), 0, 1);
             hearts.Add(heart);
-            UpdateHeart(idx, curr);
+            updateHeart(idx, curr);
             idx++;
             curr--;
         }
-        Destroy(orig);
-        if (center)
-        {
-            transform.localPosition += new Vector3((-totalWidth / 2f * transform.localScale.x) + heartWidth / 4, 0);
-        }
+        transform.localPosition += new Vector3((-totalWidth/2f * transform.localScale.x) + heartWidth/4, 0);
 	}
 	
 	void Update ()
@@ -56,7 +52,7 @@ public class HealthUI : MonoBehaviour {
             {
                 for (int i = 0; i < hearts.Count; i++)
                 {
-                    UpdateHeart(i, health.health - i);
+                    updateHeart(i, health.health - i);
                 }
             }
         }

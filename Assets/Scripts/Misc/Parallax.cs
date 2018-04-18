@@ -28,19 +28,19 @@ public class Parallax : MonoBehaviour {
             position.y = Camera.main.transform.position.y + offset.y;
             if (cameraPos.x - cameraHalfWidth < bgcoll.bounds.min.x)
             {
-                bg2.transform.position = bg.transform.position - new Vector3(bgcoll.bounds.size.x - 0.05f, 0);
+                bg2.transform.position = bg.transform.position - new Vector3(bgcoll.bounds.size.x, 0);
             }
             if (Camera.main.transform.position.x + cameraHalfWidth > bgcoll.bounds.max.x)
             {
-                bg2.transform.position = bg.transform.position + new Vector3(bgcoll.bounds.size.x - 0.05f, 0);
+                bg2.transform.position = bg.transform.position + new Vector3(bgcoll.bounds.size.x, 0);
             }
             if (Camera.main.transform.position.x - cameraHalfWidth < bg2coll.bounds.min.x)
             {
-                bg.transform.position = bg2.transform.position - new Vector3(bg2coll.bounds.size.x - 0.05f, 0);
+                bg.transform.position = bg2.transform.position - new Vector3(bg2coll.bounds.size.x, 0);
             }
             if (Camera.main.transform.position.x + cameraHalfWidth > bg2coll.bounds.max.x)
             {
-                bg.transform.position = bg2.transform.position + new Vector3(bg2coll.bounds.size.x - 0.05f, 0);
+                bg.transform.position = bg2.transform.position + new Vector3(bg2coll.bounds.size.x, 0);
             }
             position.x = cameraPos.x * parallaxfactor;
         }
