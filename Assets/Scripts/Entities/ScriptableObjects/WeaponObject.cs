@@ -6,9 +6,12 @@ using UnityEngine;
 [System.Serializable]
 public class WeaponObject : ScriptableObject
 {
+    public enum TriggerType { MANUAL, AUTOMATIC }
     public string weaponName = "Untitled";
     public float damage = 1;
     public float shootDelay = 0.5f;
     public float reloadTime = 1f;
     public int clipSize = 6;
+    public float recoilVelocity = 0f;
+    public TriggerType triggerType;
 }
