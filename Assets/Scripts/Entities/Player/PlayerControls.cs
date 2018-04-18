@@ -29,21 +29,24 @@ public class PlayerControls : MonoBehaviour
         //Debug.Log(LayerMask.LayerToName(collision.gameObject.layer));
         if(collision.gameObject.layer == LayerMask.NameToLayer("enemy"))
         {
-            Health enemyHealth = collision.transform.GetComponent<Health>();
-            if (!enemyHealth.dead)
+            if (collision.collider.GetComponent<BoxCollider2D>().bounds.max.y >= po.raycastOrigins.bottomLeft.y-0.15f)
             {
-                if (health.hitTimer <= 0)
+                Health enemyHealth = collision.transform.GetComponent<Health>();
+                if (!enemyHealth.dead)
                 {
-                    if (collision.transform.position.x >= transform.position.x)
+                    if (health.hitTimer <= 0)
                     {
-                        po.velocity.x = -bounceVelocity;
+                        if (collision.transform.position.x >= transform.position.x)
+                        {
+                            po.velocity.x = -bounceVelocity;
+                        }
+                        else
+                        {
+                            po.velocity.x = bounceVelocity;
+                        }
                     }
-                    else
-                    {
-                        po.velocity.x = bounceVelocity;
-                    }
+                    health.Hurt();
                 }
-                health.Hurt();
             }
         }
     }

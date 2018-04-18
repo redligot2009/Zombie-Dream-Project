@@ -30,7 +30,6 @@ public class GoombaAI : MonoBehaviour
             Bullet bullet = collision.transform.GetComponent<Bullet>();
             if (health.hitTimer <= 0)
             {
-                Debug.Log(po.coll.bounds.max.y.ToString() + " vs " + collision.transform.position.y.ToString());
 
                 if (collision.collider.transform.position.y > po.coll.bounds.max.y - 0.1f)
                 {

@@ -25,7 +25,7 @@ public class HealthUI : MonoBehaviour {
     }
     void Start () {
         health = target.GetComponent<Health>();
-        float curr = health.health;
+        float curr = ((health.health-1)%3)+1;
         int idx = 0;
         float heartWidth = heartSprites[0].bounds.size.x;
         float totalWidth = 0;
@@ -56,7 +56,7 @@ public class HealthUI : MonoBehaviour {
             {
                 for (int i = 0; i < hearts.Count; i++)
                 {
-                    UpdateHeart(i, health.health - i);
+                    UpdateHeart(i, (((health.health - 1) % 3) + 1)-i);
                 }
             }
         }
