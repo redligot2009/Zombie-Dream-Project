@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
 
     void Start ()
     {
-        Resume();
+        GamePaused = false; isDead = false;
     }
 
     public void Resume()
@@ -41,6 +41,11 @@ public class GameManager : MonoBehaviour {
 
     public void Restart()
     {
+        pauseMenuUI.SetActive(false);
+        deadMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        isDead = false;
+        GamePaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
