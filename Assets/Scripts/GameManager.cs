@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     {
         GamePaused = false;
         isDead = false;
+        Time.timeScale = 1f;
     }
 
     public void Resume()
