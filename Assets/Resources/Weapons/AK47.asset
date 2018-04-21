@@ -17,4 +17,5 @@ MonoBehaviour:
   reloadTime: 3
   clipSize: 32
   recoilVelocity: 2
+  cameraShakeIntensity: 0.42
   triggerType: 1

@@ -17,11 +17,14 @@ public class PlayerControls : MonoBehaviour
 
     public WeaponObject currentWeapon;
 
+    CameraShake camShake;
+
     void Start()
     {
         playerAnimation = GetComponent<PlayerAnimation>();
         po = GetComponent<PhysicsObject>();
         health = GetComponent<Health>();
+        camShake = Camera.main.transform.GetComponent<CameraShake>();
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -44,8 +47,10 @@ public class PlayerControls : MonoBehaviour
                         {
                             po.velocity.x = bounceVelocity;
                         }
+                        health.Hurt();
+                        if (!health.dead)
+                            camShake.ShakeCamera(1f, 0.05f);
                     }
-                    health.Hurt();
                 }
             }
         }
@@ -84,6 +89,10 @@ public class PlayerControls : MonoBehaviour
         go.transform.position += go.transform.right*0.75f;
         currBullet++;
         po.velocity.x -= facing * weaponRecoil * (Mathf.Abs(po.velocity.x) > 2f ? 0.5f : 1);
+        if (camShake.shakeDuration <= 0.01f)
+        {
+            camShake.ShakeCamera(currentWeapon.cameraShakeIntensity, 0.005f);
+        }
     }
 
     void SetCurrentWeapon()
@@ -176,6 +185,7 @@ public class PlayerControls : MonoBehaviour
                 po.CheckVertical(LayerMask.GetMask("hazard"), 0.1f, -1);
             if(hitToxicWaste)
             {
+                camShake.ShakeCamera(0.5f, 0.005f);
                 health.Hurt(100);
                 po.velocity.y = 0;
             }

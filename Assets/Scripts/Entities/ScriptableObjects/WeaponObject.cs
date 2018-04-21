@@ -13,5 +13,6 @@ public class WeaponObject : ScriptableObject
     public float reloadTime = 1f;
     public int clipSize = 6;
     public float recoilVelocity = 0f;
+    public float cameraShakeIntensity = 0f;
     public TriggerType triggerType;
 }
