@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour {
     }
     
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !isDead)
         {
             if (GamePaused)
             {
