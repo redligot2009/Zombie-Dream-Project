@@ -5,27 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-    public static bool GamePaused = false, isDead = false;
+    public static bool GamePaused = false;
+    public static bool isDead = false;
 
     public GameObject pauseMenuUI, deadMenuUI;
 
     void Start ()
     {
-        GamePaused = false; isDead = false;
+        GamePaused = false;
+        isDead = false;
     }
 
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
         GamePaused = false;
+        Time.timeScale = 1f;
     }
 
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
         GamePaused = true;
+        Time.timeScale = 0f;
     }
 
     public void ShowDeadMenu()
@@ -37,12 +39,12 @@ public class GameManager : MonoBehaviour {
     public void LoadMenu()
     {
         SceneManager.LoadScene("Menu");
+        GamePaused = false;
+        isDead = false;
     }
 
     public void Restart()
     {
-        pauseMenuUI.SetActive(false);
-        deadMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isDead = false;
         GamePaused = false;
