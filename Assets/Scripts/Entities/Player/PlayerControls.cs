@@ -201,6 +201,7 @@ public class PlayerControls : MonoBehaviour
         }
         else
         {
+            GameManager.isDead = true;
         }
     }
 }

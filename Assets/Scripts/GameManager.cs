@@ -5,16 +5,67 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetKey(KeyCode.R))
+    public static bool GamePaused = false, isDead = false;
+
+    public GameObject pauseMenuUI, deadMenuUI;
+
+    void Start ()
+    {
+        Resume();
+    }
+
+    public void Resume()
+    {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        GamePaused = false;
+    }
+
+    public void Pause()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GamePaused = true;
+    }
+
+    public void ShowDeadMenu()
+    {
+        deadMenuUI.SetActive(true);
+        Time.timeScale = 0.5f;
+    }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    void Update () {
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (GamePaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
         }
-	}
+        if(isDead)
+        {
+            ShowDeadMenu();
+        }
+        if(GamePaused || isDead)
+        {
+            if (Input.GetKey(KeyCode.R))
+            {
+                Restart();
+            }
+        }
+    }
 }

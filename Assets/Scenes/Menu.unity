@@ -147,7 +147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 135, y: -28}
+  m_AnchoredPosition: {x: 135, y: -52}
   m_SizeDelta: {x: 477.8, y: 313.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &66940998
@@ -1903,7 +1903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -69, y: 228}
+  m_AnchoredPosition: {x: -35, y: 293}
   m_SizeDelta: {x: 70, y: -224.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1604425158
@@ -1971,7 +1971,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_enableKerning: 1
@@ -1990,7 +1990,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -5.4449024, y: 7.024582, z: 1.7589587, w: -1.76091}
+  m_margin: {x: -5.4449024, y: 318.15363, z: 1.7589587, w: 125.23048}
   m_textInfo:
     textComponent: {fileID: 1604425158}
     characterCount: 12
@@ -2309,7 +2309,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
