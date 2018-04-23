@@ -31,13 +31,16 @@ public class PlayerControls : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("enemy"))
         {
-            Health enemyHealth = collision.transform.GetComponent<Health>();
-            if (collision.collider.GetComponent<BoxCollider2D>().bounds.max.y < po.raycastOrigins.bottomLeft.y)
+            foreach (var point in collision.contacts)
             {
-                if (!enemyHealth.dead)
+                Health enemyHealth = point.collider.transform.GetComponent<Health>();
+                if (point.collider.GetComponent<BoxCollider2D>().bounds.max.y < po.raycastOrigins.bottomLeft.y)
                 {
-                    po.velocity.y = jumpSpeed;
-                    enemyHealth.Hurt();
+                    if (!enemyHealth.dead)
+                    {
+                        po.velocity.y = jumpSpeed;
+                        enemyHealth.Hurt();
+                    }
                 }
             }
         }
