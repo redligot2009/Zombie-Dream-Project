@@ -27,14 +27,33 @@ public class PlayerControls : MonoBehaviour
         camShake = Camera.main.transform.GetComponent<CameraShake>();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("enemy"))
+        {
+            foreach (var point in collision.contacts)
+            {
+                Health enemyHealth = point.collider.transform.GetComponent<Health>();
+                if (point.collider.GetComponent<BoxCollider2D>().bounds.max.y < po.raycastOrigins.bottomLeft.y)
+                {
+                    if (!enemyHealth.dead)
+                    {
+                        po.velocity.y = jumpSpeed;
+                        enemyHealth.Hurt();
+                    }
+                }
+            }
+        }
+    }
+
     void OnCollisionStay2D(Collision2D collision)
     {
         //Debug.Log(LayerMask.LayerToName(collision.gameObject.layer));
         if(collision.gameObject.layer == LayerMask.NameToLayer("enemy"))
         {
+            Health enemyHealth = collision.transform.GetComponent<Health>();
             if (collision.collider.GetComponent<BoxCollider2D>().bounds.max.y >= po.raycastOrigins.bottomLeft.y-0.15f)
             {
-                Health enemyHealth = collision.transform.GetComponent<Health>();
                 if (!enemyHealth.dead)
                 {
                     if (health.hitTimer <= 0)
@@ -64,7 +83,7 @@ public class PlayerControls : MonoBehaviour
     [HideInInspector]
     public bool jump = false, attack = false, jumprelease = false;
     [HideInInspector]
-    public bool shoot = false, shootDown = false;
+    public bool shoot = false, shootDown = false, reload = false;
     
     public int facing = 1;
 
@@ -103,14 +122,15 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         //control bindings
-        left = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
-        right = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
-        jump = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Z);
-        jumprelease = Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Z);
-        up = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-        down = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+        left = /*Input.GetKey(KeyCode.A) ||*/ Input.GetKey(KeyCode.LeftArrow);
+        right = /*Input.GetKey(KeyCode.D) ||*/ Input.GetKey(KeyCode.RightArrow);
+        jump = /*Input.GetKey(KeyCode.Space) ||*/ Input.GetKey(KeyCode.Z);
+        jumprelease = /*Input.GetKeyUp(KeyCode.Space) ||*/ Input.GetKeyUp(KeyCode.Z);
+        up = /*Input.GetKey(KeyCode.W) ||*/ Input.GetKey(KeyCode.UpArrow);
+        down = /*Input.GetKey(KeyCode.S) ||*/ Input.GetKey(KeyCode.DownArrow);
         shoot = Input.GetKeyDown(KeyCode.X);
         shootDown = Input.GetKey(KeyCode.X);
+        reload = Input.GetKey(KeyCode.R);
         if (!health.dead)
         {
             //hit ground
@@ -152,7 +172,7 @@ public class PlayerControls : MonoBehaviour
             {
                 reloadTimer -= Time.deltaTime;
             }
-            if(currBullet > clipSize)
+            if(currBullet > clipSize || currBullet > 1 && reload)
             {
                 currBullet = 1;
                 reloadTimer = reloadTime;
@@ -185,22 +205,6 @@ public class PlayerControls : MonoBehaviour
                 camShake.ShakeCamera(0.1f, 0.1f);
                 health.Hurt(100);
                 po.velocity.y = 0;
-            }
-
-            //hit enemy
-            RaycastHit2D hitEnemy = po.CheckHorizontalHit(LayerMask.GetMask("enemy"),0,1);
-            if (!hitEnemy) hitEnemy = po.CheckHorizontalHit(LayerMask.GetMask("enemy"), -1);
-            RaycastHit2D hitEnemyBounce = po.CheckVerticalHit(LayerMask.GetMask("enemy"),0.22f,-1);
-
-            //hit enemy damage enemy
-            if (hitEnemyBounce && !po.collisions.below && (po.coll.bounds.min.y-hitEnemyBounce.transform.position.y) >= po.coll.bounds.extents.y - po.skinDist && po.velocity.y <= 0)
-            {
-                Health enemyHealth = hitEnemyBounce.transform.GetComponent<Health>();
-                if (!enemyHealth.dead)
-                {
-                    po.velocity.y = jumpSpeed;
-                    enemyHealth.Hurt();
-                }
             }
             //physics shit
             po.velocity += Physics2D.gravity * po.gravityModifier * Time.deltaTime;
