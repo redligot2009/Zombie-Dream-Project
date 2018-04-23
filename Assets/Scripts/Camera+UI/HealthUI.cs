@@ -11,6 +11,7 @@ public class HealthUI : MonoBehaviour {
     public float offsetX = 0;
     public bool center = true;
     public int heartCount = 3;
+    public Color heartTint;
 
     void UpdateHeart(int idx, float health)
     {
@@ -35,6 +36,8 @@ public class HealthUI : MonoBehaviour {
         {
             GameObject heart = Instantiate(orig, transform);
             SpriteRenderer spriteRenderer = heart.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingOrder = 2;
+            spriteRenderer.color = heartTint;
             totalWidth += heartWidth + offsetX;
             heart.transform.localPosition = new Vector3(idx * (heartWidth+offsetX), 0, 1);
             hearts.Add(heart);

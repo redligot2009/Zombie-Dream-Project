@@ -1181,6 +1181,8 @@ MonoBehaviour:
   hearts: []
   offsetX: 0
   center: 1
+  heartCount: 3
+  heartTint: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &114241669227718624
 MonoBehaviour:
   m_ObjectHideFlags: 1
