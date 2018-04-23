@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour {
         transform.Translate(new Vector3(moveSpeed * Time.deltaTime,0));
         if (lifeTimer > 0)
             lifeTimer -= Time.deltaTime;
-        if (lifeTimer <= 0 || !cam.InCameraBounds(transform.position.x, transform.position.y))
+        if (lifeTimer <= 0) //|| !cam.InCameraBounds(transform.position.x, transform.position.y))
         {
             Destroy(gameObject);
         }
