@@ -20,7 +20,7 @@ public class PhysicsObject : MonoBehaviour
     public float hopThreshold = 0.05f;
     public int horizontalRayCount = 4, verticalRayCount = 4;
     float horizontalRaySpacing, verticalRaySpacing;
-    RayCastOrigins raycastOrigins;
+    public RayCastOrigins raycastOrigins;
     public CollisionInfo collisions;
 
     void Start()
@@ -324,7 +324,7 @@ public class PhysicsObject : MonoBehaviour
         verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
     }
 
-    struct RayCastOrigins
+    public struct RayCastOrigins
     {
         public Vector2 topLeft, topRight;
         public Vector2 bottomLeft, bottomRight;
