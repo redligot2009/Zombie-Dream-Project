@@ -23,7 +23,36 @@ public class GoombaAI : MonoBehaviour
 
     }
 
-	void Update ()
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("bullet") && !health.dead)
+        {
+            Bullet bullet = collision.transform.GetComponent<Bullet>();
+            if (health.hitTimer <= 0)
+            {
+
+                if (collision.collider.transform.position.y > po.coll.bounds.max.y - 0.1f)
+                {
+                    po.velocity.x = 0f;
+                }
+                else
+                {
+                    if (collision.transform.position.x >= transform.position.x)
+                    {
+                        po.velocity.x = -5f;
+                    }
+                    else
+                    {
+                        po.velocity.x = 5f;
+                    }
+                }
+                Destroy(collision.gameObject);
+            }
+            health.Hurt(bullet.damage);
+        }
+    }
+
+    void Update ()
     {
         if (!health.dead)
         {
@@ -54,19 +83,20 @@ public class GoombaAI : MonoBehaviour
 
             RaycastHit2D hitBullet = po.CheckBoxHit(LayerMask.GetMask("bullet"));
 
-            if(hitBullet)
+            /*if(hitBullet)
             {
                 Bullet bullet = hitBullet.transform.GetComponent<Bullet>();
                 if (health.hitTimer <= 0)
                 {
-                    if (hitBullet.point.y > po.coll.bounds.max.y - 0.15f)
+                    Debug.Log(po.coll.bounds.max.y.ToString() + " vs " + hitBullet.point.y.ToString());
+
+                    if (hitBullet.collider.transform.position.y > po.coll.bounds.max.y-0.4f)
                     {
+                        Debug.Log("YES");
                         po.velocity.x = 0f;
                     }
                     else
-                    {
-                        //Debug.Log(hitBullet.point.y.ToString() + " vs. " + po.coll.bounds.max.y);
-                        
+                    {                        
                         if (hitBullet.point.x >= transform.position.x)
                         {
                             po.velocity.x = -5f;
@@ -79,7 +109,7 @@ public class GoombaAI : MonoBehaviour
                     Destroy(hitBullet.transform.gameObject);
                 }
                 health.Hurt(bullet.damage);
-            }
+            }*/
             
         }
         else
