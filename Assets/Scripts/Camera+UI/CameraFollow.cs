@@ -30,12 +30,6 @@ public class CameraFollow : MonoBehaviour {
         levelMaxX = rightBounds.position.x - RightBoundsWidth - (camWidth / 2f);
         levelMinY = belowBounds.position.y + belowBoundsHeight + (camHeight / 2f);
         levelMaxY = aboveBounds.position.y - aboveBoundsHeight - (camHeight / 2f);
-        if (target)
-        {
-            float targetX = Mathf.Max(levelMinX, Mathf.Min(levelMaxX, target.position.x));
-            float targetY = Mathf.Max(levelMinY, Mathf.Min(levelMaxY, target.position.y));
-            transform.position = new Vector3(targetX, targetY, transform.position.z);
-        }
     }
 	
     public bool InCameraBounds(float x, float y)

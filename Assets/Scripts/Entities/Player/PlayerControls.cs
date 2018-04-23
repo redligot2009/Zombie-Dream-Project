@@ -17,14 +17,11 @@ public class PlayerControls : MonoBehaviour
 
     public WeaponObject currentWeapon;
 
-    CameraShake camShake;
-
     void Start()
     {
         playerAnimation = GetComponent<PlayerAnimation>();
         po = GetComponent<PhysicsObject>();
         health = GetComponent<Health>();
-        camShake = Camera.main.transform.GetComponent<CameraShake>();
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -32,26 +29,21 @@ public class PlayerControls : MonoBehaviour
         //Debug.Log(LayerMask.LayerToName(collision.gameObject.layer));
         if(collision.gameObject.layer == LayerMask.NameToLayer("enemy"))
         {
-            if (collision.collider.GetComponent<BoxCollider2D>().bounds.max.y >= po.raycastOrigins.bottomLeft.y-0.15f)
+            Health enemyHealth = collision.transform.GetComponent<Health>();
+            if (!enemyHealth.dead)
             {
-                Health enemyHealth = collision.transform.GetComponent<Health>();
-                if (!enemyHealth.dead)
+                if (health.hitTimer <= 0)
                 {
-                    if (health.hitTimer <= 0)
+                    if (collision.transform.position.x >= transform.position.x)
                     {
-                        if (collision.transform.position.x >= transform.position.x)
-                        {
-                            po.velocity.x = -bounceVelocity;
-                        }
-                        else
-                        {
-                            po.velocity.x = bounceVelocity;
-                        }
-                        health.Hurt();
-                        if (!health.dead)
-                            camShake.ShakeCamera(0.1f, 0.1f);
+                        po.velocity.x = -bounceVelocity;
+                    }
+                    else
+                    {
+                        po.velocity.x = bounceVelocity;
                     }
                 }
+                health.Hurt();
             }
         }
     }
@@ -64,7 +56,7 @@ public class PlayerControls : MonoBehaviour
     [HideInInspector]
     public bool jump = false, attack = false, jumprelease = false;
     [HideInInspector]
-    public bool shoot = false, shootDown = false;
+    public bool shoot = false;
     
     public int facing = 1;
 
@@ -73,10 +65,8 @@ public class PlayerControls : MonoBehaviour
     public float reloadTime = 1f;
     public float reloadTimer = 0;
     public float weaponDamage = 1f;
-    public float weaponRecoil = 0f;
     public int clipSize = 6;
     public int currBullet = 1;
-    Vector2 recoilVelocity = Vector2.zero;
 
     public void Shoot()
     {
@@ -88,16 +78,6 @@ public class PlayerControls : MonoBehaviour
         go.transform.position += 0.33f * go.transform.up;
         go.transform.position += go.transform.right*0.75f;
         currBullet++;
-        po.velocity.x -= facing * weaponRecoil * (Mathf.Abs(po.velocity.x) > 2f ? 0.5f : 1);
-        camShake.ShakeCamera(currentWeapon.cameraShakeIntensity, 0.05f);
-    }
-
-    void SetCurrentWeapon()
-    {
-        shootDelay = currentWeapon.shootDelay;
-        reloadTime = currentWeapon.reloadTime;
-        clipSize = currentWeapon.clipSize;
-        weaponRecoil = currentWeapon.recoilVelocity;
     }
 
     void Update()
@@ -110,7 +90,6 @@ public class PlayerControls : MonoBehaviour
         up = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
         down = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
         shoot = Input.GetKeyDown(KeyCode.X);
-        shootDown = Input.GetKey(KeyCode.X);
         if (!health.dead)
         {
             //hit ground
@@ -128,7 +107,7 @@ public class PlayerControls : MonoBehaviour
             }
             else
             {
-                po.velocity.x = Mathf.SmoothStep(po.velocity.x, 0f, Time.deltaTime * 10f);
+                po.velocity.x = Mathf.Lerp(po.velocity.x, 0f, Time.deltaTime * 10f);
             }
             if (jump && po.collisions.below)
             {
@@ -159,14 +138,14 @@ public class PlayerControls : MonoBehaviour
             }
             if(currentWeapon != null)
             {
-                SetCurrentWeapon();
+                shootDelay = currentWeapon.shootDelay;
+                reloadTime = currentWeapon.reloadTime;
+                clipSize = currentWeapon.clipSize;
                 armed = true;
             }
             if (armed)
             {
-                if ((shoot&&currentWeapon.triggerType == WeaponObject.TriggerType.MANUAL || 
-                    shootDown && currentWeapon.triggerType == WeaponObject.TriggerType.AUTOMATIC) 
-                    && shootTimer <= 0 && reloadTimer <= 0)
+                if (shoot && shootTimer <= 0 && reloadTimer <= 0)
                 {
                     shootTimer = shootDelay;
                     Shoot();
@@ -182,7 +161,6 @@ public class PlayerControls : MonoBehaviour
                 po.CheckVertical(LayerMask.GetMask("hazard"), 0.1f, -1);
             if(hitToxicWaste)
             {
-                camShake.ShakeCamera(0.1f, 0.1f);
                 health.Hurt(100);
                 po.velocity.y = 0;
             }
@@ -208,7 +186,6 @@ public class PlayerControls : MonoBehaviour
         }
         else
         {
-            GameManager.isDead = true;
         }
     }
 }

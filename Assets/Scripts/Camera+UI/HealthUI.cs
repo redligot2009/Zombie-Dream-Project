@@ -9,15 +9,13 @@ public class HealthUI : MonoBehaviour {
     public Sprite[] heartSprites;
     public List<GameObject> hearts;
     public float offsetX = 0;
-    public bool center = true;
-    public int heartCount = 3;
 
-    void UpdateHeart(int idx, float health)
+    void updateHeart(int idx, float health)
     {
         int i = 0;
         for (float rem = 0; rem <= 1; rem += 0.25f, i++)
         {
-            if (health >= Mathf.Max(1 - rem,0))
+            if (health >= 1 - rem)
             {
                 hearts[idx].GetComponent<SpriteRenderer>().sprite = heartSprites[i];
                 break;
@@ -26,27 +24,24 @@ public class HealthUI : MonoBehaviour {
     }
     void Start () {
         health = target.GetComponent<Health>();
-        float curr = ((health.health-1)%heartCount)+1;
+        //Instantiate(, transform);
+        float curr = health.health;
         int idx = 0;
         float heartWidth = heartSprites[0].bounds.size.x;
         float totalWidth = 0;
-        GameObject orig = new GameObject("heart", typeof(SpriteRenderer));
-        while (idx < heartCount)
+        while(curr > 0)
         {
-            GameObject heart = Instantiate(orig, transform);
+            GameObject heart = Instantiate(new GameObject(), transform);
+            heart.AddComponent<SpriteRenderer>();
             SpriteRenderer spriteRenderer = heart.GetComponent<SpriteRenderer>();
             totalWidth += heartWidth + offsetX;
             heart.transform.localPosition = new Vector3(idx * (heartWidth+offsetX), 0, 1);
             hearts.Add(heart);
-            UpdateHeart(idx, Mathf.Max(curr,0));
+            updateHeart(idx, curr);
             idx++;
             curr--;
         }
-        Destroy(orig);
-        if (center)
-        {
-            transform.localPosition += new Vector3((-totalWidth / 2f * transform.localScale.x) + heartWidth / 4, 0);
-        }
+        transform.localPosition += new Vector3((-totalWidth/2f * transform.localScale.x) + heartWidth/4, 0);
 	}
 	
 	void Update ()
@@ -57,7 +52,7 @@ public class HealthUI : MonoBehaviour {
             {
                 for (int i = 0; i < hearts.Count; i++)
                 {
-                    UpdateHeart(i, (((health.health - 1) % heartCount) + 1)-i);
+                    updateHeart(i, health.health - i);
                 }
             }
         }
