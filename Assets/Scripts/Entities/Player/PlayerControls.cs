@@ -49,7 +49,7 @@ public class PlayerControls : MonoBehaviour
                         }
                         health.Hurt();
                         if (!health.dead)
-                            camShake.ShakeCamera(1f, 0.05f);
+                            camShake.ShakeCamera(0.1f, 0.1f);
                     }
                 }
             }
@@ -89,10 +89,7 @@ public class PlayerControls : MonoBehaviour
         go.transform.position += go.transform.right*0.75f;
         currBullet++;
         po.velocity.x -= facing * weaponRecoil * (Mathf.Abs(po.velocity.x) > 2f ? 0.5f : 1);
-        if (camShake.shakeDuration <= 0.01f)
-        {
-            camShake.ShakeCamera(currentWeapon.cameraShakeIntensity, 0.005f);
-        }
+        camShake.ShakeCamera(currentWeapon.cameraShakeIntensity, 0.05f);
     }
 
     void SetCurrentWeapon()
@@ -185,7 +182,7 @@ public class PlayerControls : MonoBehaviour
                 po.CheckVertical(LayerMask.GetMask("hazard"), 0.1f, -1);
             if(hitToxicWaste)
             {
-                camShake.ShakeCamera(0.5f, 0.005f);
+                camShake.ShakeCamera(0.1f, 0.1f);
                 health.Hurt(100);
                 po.velocity.y = 0;
             }

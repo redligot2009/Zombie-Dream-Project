@@ -10,13 +10,14 @@ public class HealthUI : MonoBehaviour {
     public List<GameObject> hearts;
     public float offsetX = 0;
     public bool center = true;
+    public int heartCount = 3;
 
     void UpdateHeart(int idx, float health)
     {
         int i = 0;
         for (float rem = 0; rem <= 1; rem += 0.25f, i++)
         {
-            if (health >= 1 - rem)
+            if (health >= Mathf.Max(1 - rem,0))
             {
                 hearts[idx].GetComponent<SpriteRenderer>().sprite = heartSprites[i];
                 break;
@@ -25,19 +26,19 @@ public class HealthUI : MonoBehaviour {
     }
     void Start () {
         health = target.GetComponent<Health>();
-        float curr = ((health.health-1)%3)+1;
+        float curr = ((health.health-1)%heartCount)+1;
         int idx = 0;
         float heartWidth = heartSprites[0].bounds.size.x;
         float totalWidth = 0;
         GameObject orig = new GameObject("heart", typeof(SpriteRenderer));
-        while (curr > 0)
+        while (idx < heartCount)
         {
             GameObject heart = Instantiate(orig, transform);
             SpriteRenderer spriteRenderer = heart.GetComponent<SpriteRenderer>();
             totalWidth += heartWidth + offsetX;
             heart.transform.localPosition = new Vector3(idx * (heartWidth+offsetX), 0, 1);
             hearts.Add(heart);
-            UpdateHeart(idx, curr);
+            UpdateHeart(idx, Mathf.Max(curr,0));
             idx++;
             curr--;
         }
@@ -56,7 +57,7 @@ public class HealthUI : MonoBehaviour {
             {
                 for (int i = 0; i < hearts.Count; i++)
                 {
-                    UpdateHeart(i, (((health.health - 1) % 3) + 1)-i);
+                    UpdateHeart(i, (((health.health - 1) % heartCount) + 1)-i);
                 }
             }
         }
