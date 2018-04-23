@@ -32,7 +32,7 @@ public class PlayerControls : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("enemy"))
         {
             Health enemyHealth = collision.transform.GetComponent<Health>();
-            if (collision.collider.GetComponent<BoxCollider2D>().bounds.max.y < po.raycastOrigins.bottomLeft.y - 0.15f)
+            if (collision.collider.GetComponent<BoxCollider2D>().bounds.max.y < po.raycastOrigins.bottomLeft.y)
             {
                 if (!enemyHealth.dead)
                 {
