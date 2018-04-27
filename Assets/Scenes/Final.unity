@@ -1521,6 +1521,31 @@ Prefab:
       propertyPath: m_Name
       value: ak47
       objectReference: {fileID: 0}
+    - target: {fileID: 61415508123899896, guid: af54a4bf44bb512478eda94cc9978897,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 61415508123899896, guid: af54a4bf44bb512478eda94cc9978897,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 61415508123899896, guid: af54a4bf44bb512478eda94cc9978897,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 2.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 61415508123899896, guid: af54a4bf44bb512478eda94cc9978897,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 2.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 61415508123899896, guid: af54a4bf44bb512478eda94cc9978897,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.74
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: af54a4bf44bb512478eda94cc9978897, type: 2}
   m_IsPrefabParent: 0

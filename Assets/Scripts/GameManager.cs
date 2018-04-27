@@ -13,12 +13,18 @@ public class GameManager : MonoBehaviour {
 
     PlayerControls player;
 
+    public AudioSource music;
+    public AudioClip deathTheme;
+    public AudioClip bgTheme;
+    public bool playDead = true;
+
     void Start ()
     {
+        music = transform.Find("musicSource").GetComponent<AudioSource>();
         GamePaused = false;
         isDead = false;
         Time.timeScale = 1f;
-        player = GameObject.FindObjectOfType<PlayerControls>();
+        player = FindObjectOfType<PlayerControls>();
     }
 
     public void Resume()
@@ -48,6 +54,13 @@ public class GameManager : MonoBehaviour {
         isDead = false;
     }
 
+    public static void HardReset()
+    {
+        isDead = false;
+        GamePaused = false;
+        currentWeapon = null;
+    }
+
     public void Restart()
     {
         Time.timeScale = 1f;
@@ -55,7 +68,6 @@ public class GameManager : MonoBehaviour {
         GamePaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    
     void Update () {
         if (Input.GetKeyDown(KeyCode.Escape) && !isDead)
         {
@@ -70,10 +82,25 @@ public class GameManager : MonoBehaviour {
         }
         if(isDead)
         {
+            if (!playDead)
+            {
+                music.clip = deathTheme;
+                music.loop = false;
+                music.Play();
+                playDead = true;
+            }
             ShowDeadMenu();
         }
         else
         {
+            if(playDead)
+            {
+                Debug.Log("YO");
+                music.clip = bgTheme;
+                music.loop = true;
+                music.Play();
+                playDead = false;
+            }
             if(player.currentWeapon != currentWeapon)
                 player.currentWeapon = currentWeapon;
         }

@@ -21,15 +21,6 @@ public class PlayerControls : MonoBehaviour
 
     public AudioSource audioSource;
 
-    void Start()
-    {
-        playerAnimation = GetComponent<PlayerAnimation>();
-        po = GetComponent<PhysicsObject>();
-        health = GetComponent<Health>();
-        camShake = Camera.main.transform.GetComponent<CameraShake>();
-        audioSource = GetComponent<AudioSource>();
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("enemy"))
@@ -69,6 +60,10 @@ public class PlayerControls : MonoBehaviour
                         {
                             po.velocity.x = bounceVelocity;
                         }
+                        if (health.hitTimer <= 0)
+                        {
+                            hurtSoundAudioSource.Play();
+                        }
                         health.Hurt();
                         if (!health.dead)
                             camShake.ShakeCamera(0.1f, 0.1f);
@@ -92,8 +87,11 @@ public class PlayerControls : MonoBehaviour
 
     public float shootTimer = 0;
     public float shootDelay = 0.1f;
+
     public float reloadTime = 1f;
     public float reloadTimer = 0;
+    AudioSource reloadSoundAudioSource, hurtSoundAudioSource;
+
     public float weaponDamage = 1f;
     public float weaponRecoil = 0f;
     public int clipSize = 6;
@@ -124,6 +122,17 @@ public class PlayerControls : MonoBehaviour
         weaponRecoil = currentWeapon.recoilVelocity;
         audioSource.clip = currentWeapon.shotSound;
         if (currentWeapon.loopShot) audioSource.loop = true;
+    }
+    
+    void Start()
+    {
+        playerAnimation = GetComponent<PlayerAnimation>();
+        po = GetComponent<PhysicsObject>();
+        health = GetComponent<Health>();
+        camShake = Camera.main.transform.GetComponent<CameraShake>();
+        audioSource = GetComponent<AudioSource>();
+        reloadSoundAudioSource = GameObject.Find("reloadSound").GetComponent<AudioSource>();
+        hurtSoundAudioSource = GameObject.Find("hurtSound").GetComponent<AudioSource>();
     }
 
     void Update()
@@ -171,19 +180,11 @@ public class PlayerControls : MonoBehaviour
             }
             /*Weapons Logic*/
 
-            //timers
-            if (shootTimer > 0)
-            {
-                shootTimer -= Time.deltaTime;
-            }
-            if (reloadTimer > 0)
-            {
-                reloadTimer -= Time.deltaTime;
-            }
             if(currBullet > clipSize || currBullet > 1 && reload)
             {
                 currBullet = 1;
                 reloadTimer = reloadTime;
+                reloadSoundAudioSource.Play();
             }
             if(currentWeapon != null)
             {
@@ -201,12 +202,22 @@ public class PlayerControls : MonoBehaviour
                     audioSource.volume = 1;
                     Shoot();
                 }
-                if (!shootDown && currentWeapon.triggerType == WeaponObject.TriggerType.AUTOMATIC || reloadTimer > 0 || health.dead)
+                if (!shootDown && currentWeapon.triggerType == WeaponObject.TriggerType.AUTOMATIC || reloadTimer > 0 || health.dead || GameManager.GamePaused)
                 {
                     audioSource.volume = Mathf.Lerp(audioSource.volume,0,Time.deltaTime*10f);
                     //audioSource.clip = currentWeapon.releaseSound;
                     //audioSource.PlayOneShot(currentWeapon.releaseSound);
                 }
+            }
+
+            //timers
+            if (shootTimer > 0)
+            {
+                shootTimer -= Time.deltaTime;
+            }
+            if (reloadTimer > 0)
+            {
+                reloadTimer -= Time.deltaTime;
             }
 
             /*End Weapons Logic*/
@@ -219,6 +230,10 @@ public class PlayerControls : MonoBehaviour
             if(hitToxicWaste)
             {
                 camShake.ShakeCamera(0.1f, 0.1f);
+                if(health.hitTimer <= 0 && !health.dead)
+                {
+                    hurtSoundAudioSource.Play();
+                }
                 health.Hurt(100);
                 po.velocity.y = 0;
             }
