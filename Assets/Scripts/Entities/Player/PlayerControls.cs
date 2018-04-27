@@ -201,7 +201,7 @@ public class PlayerControls : MonoBehaviour
                     audioSource.volume = 1;
                     Shoot();
                 }
-                if (!shootDown && currentWeapon.triggerType == WeaponObject.TriggerType.AUTOMATIC || reloadTimer > 0)
+                if (!shootDown && currentWeapon.triggerType == WeaponObject.TriggerType.AUTOMATIC || reloadTimer > 0 || health.dead)
                 {
                     audioSource.volume = Mathf.Lerp(audioSource.volume,0,Time.deltaTime*10f);
                     //audioSource.clip = currentWeapon.releaseSound;
@@ -228,6 +228,7 @@ public class PlayerControls : MonoBehaviour
         }
         else
         {
+            audioSource.volume = Mathf.Lerp(audioSource.volume, 0, Time.deltaTime * 10f);
             GameManager.isDead = true;
         }
     }
