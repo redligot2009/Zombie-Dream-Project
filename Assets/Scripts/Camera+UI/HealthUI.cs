@@ -60,7 +60,7 @@ public class HealthUI : MonoBehaviour {
             {
                 for (int i = 0; i < hearts.Count; i++)
                 {
-                    UpdateHeart(i, (((health.health - 1) % heartCount) + 1)-i);
+                    UpdateHeart(i, Mathf.Max((((health.health - 1) % heartCount) + 1)-i,0));
                 }
             }
         }

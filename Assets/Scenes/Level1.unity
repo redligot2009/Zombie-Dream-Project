@@ -8459,26 +8459,6 @@ CompositeCollider2D:
         Y: -59687500
       - X: 978906240
         Y: -59687500
-    - - X: 919843776
-        Y: -39531248
-      - X: 919843776
-        Y: -20000000
-      - X: 920000000
-        Y: -17812500
-      - X: 920000000
-        Y: -10312500
-      - X: 910000000
-        Y: -10312500
-      - X: 910000000
-        Y: -20000000
-      - X: 910156224
-        Y: -20000000
-      - X: 910156224
-        Y: -39062500
-      - X: 910468736
-        Y: -39687500
-      - X: 918906240
-        Y: -39687500
     - - X: 769843776
         Y: -39531248
       - X: 769843776
@@ -8498,6 +8478,26 @@ CompositeCollider2D:
       - X: 760468736
         Y: -39687500
       - X: 768906240
+        Y: -39687500
+    - - X: 919843776
+        Y: -39531248
+      - X: 919843776
+        Y: -20000000
+      - X: 920000000
+        Y: -17812500
+      - X: 920000000
+        Y: -10312500
+      - X: 910000000
+        Y: -10312500
+      - X: 910000000
+        Y: -20000000
+      - X: 910156224
+        Y: -20000000
+      - X: 910156224
+        Y: -39062500
+      - X: 910468736
+        Y: -39687500
+      - X: 918906240
         Y: -39687500
     - - X: 119843752
         Y: -30000000
@@ -8856,16 +8856,6 @@ CompositeCollider2D:
       - {x: 97.015625, y: -5.90625}
       - {x: 97.046875, y: -5.96875}
       - {x: 97.890625, y: -5.96875}
-    - - {x: 76.984375, y: -3.9531248}
-      - {x: 76.984375, y: -2}
-      - {x: 77, y: -1.78125}
-      - {x: 77, y: -1.03125}
-      - {x: 76, y: -1.03125}
-      - {x: 76, y: -2}
-      - {x: 76.015625, y: -2}
-      - {x: 76.015625, y: -3.90625}
-      - {x: 76.046875, y: -3.96875}
-      - {x: 76.890625, y: -3.96875}
     - - {x: 91.984375, y: -3.9531248}
       - {x: 91.984375, y: -2}
       - {x: 92, y: -1.78125}
@@ -8876,6 +8866,16 @@ CompositeCollider2D:
       - {x: 91.015625, y: -3.90625}
       - {x: 91.046875, y: -3.96875}
       - {x: 91.890625, y: -3.96875}
+    - - {x: 76.984375, y: -3.9531248}
+      - {x: 76.984375, y: -2}
+      - {x: 77, y: -1.78125}
+      - {x: 77, y: -1.03125}
+      - {x: 76, y: -1.03125}
+      - {x: 76, y: -2}
+      - {x: 76.015625, y: -2}
+      - {x: 76.015625, y: -3.90625}
+      - {x: 76.046875, y: -3.96875}
+      - {x: 76.890625, y: -3.96875}
     - - {x: 11.984375, y: -3}
       - {x: 12, y: -2.78125}
       - {x: 12, y: -2.03125}
@@ -12605,16 +12605,6 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114316360128381556, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114316360128381556, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114847370499053994, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -12625,47 +12615,22 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114316360128381556, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114316360128381556, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114443329918141850, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
         type: 2}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114443329918141850, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114641695762642188, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114641695762642188, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114272363142597438, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114272363142597438, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 223388347484923426, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
-        type: 2}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1826726288}
-    - target: {fileID: 114453645115156710, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114453645115156710, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
@@ -12674,6 +12639,11 @@ Prefab:
       propertyPath: m_Name
       value: UI+MAIN
       objectReference: {fileID: 0}
+    - target: {fileID: 223388347484923426, guid: a0ef962967d3fa041aff6d1dcf0e0f45,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1826726288}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0ef962967d3fa041aff6d1dcf0e0f45, type: 2}
   m_IsPrefabParent: 0
