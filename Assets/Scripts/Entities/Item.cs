@@ -35,7 +35,8 @@ public class Item : MonoBehaviour {
                         player.health.Heal(itemStats.healthRestore);
                         break;
                     case ItemObject.ItemType.ITEM_PICKUP:
-                        player.currentWeapon = itemStats.associatedWeapon;
+                        //player.currentWeapon = itemStats.associatedWeapon;
+                        GameManager.currentWeapon = itemStats.associatedWeapon;
                         break;
                 }
                 Destroy(transform.gameObject);

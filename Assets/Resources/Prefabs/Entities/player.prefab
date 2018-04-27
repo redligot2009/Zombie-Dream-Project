@@ -671,7 +671,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555027452396312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.34, y: -3.01, z: 0}
+  m_LocalPosition: {x: -7.41, y: -1.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4298831892115142}
@@ -2126,7 +2126,10 @@ MonoBehaviour:
   health: 3
   dead: 0
   hitTimer: 0
+  healTimer: 0
+  healTimerDelay: 0.1
   hitTimerDelay: 1
+  origHealth: 0
 --- !u!114 &114578636480915982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2228,7 +2231,7 @@ MonoBehaviour:
   bounceVelocity: 5
   health: {fileID: 0}
   bullet: {fileID: 1993847544028874, guid: 6c2a27c624ec6a94781363a9f7c807df, type: 2}
-  currentWeapon: {fileID: 11400000, guid: eaf15468cf7761b47a6051cce3d4c84c, type: 2}
+  currentWeapon: {fileID: 0}
   armed: 0
   left: 0
   right: 0
@@ -2239,6 +2242,7 @@ MonoBehaviour:
   jumprelease: 0
   shoot: 0
   shootDown: 0
+  reload: 0
   facing: 1
   shootTimer: 0
   shootDelay: 0.5

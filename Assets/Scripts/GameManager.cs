@@ -7,14 +7,18 @@ public class GameManager : MonoBehaviour {
 
     public static bool GamePaused = false;
     public static bool isDead = false;
+    public static WeaponObject currentWeapon;
 
     public GameObject pauseMenuUI, deadMenuUI;
+
+    PlayerControls player;
 
     void Start ()
     {
         GamePaused = false;
         isDead = false;
         Time.timeScale = 1f;
+        player = GameObject.FindObjectOfType<PlayerControls>();
     }
 
     public void Resume()
@@ -67,6 +71,11 @@ public class GameManager : MonoBehaviour {
         if(isDead)
         {
             ShowDeadMenu();
+        }
+        else
+        {
+            if(player.currentWeapon != currentWeapon)
+                player.currentWeapon = currentWeapon;
         }
         if(GamePaused || isDead)
         {
