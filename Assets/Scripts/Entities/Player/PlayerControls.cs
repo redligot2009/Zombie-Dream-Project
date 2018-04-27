@@ -113,6 +113,7 @@ public class PlayerControls : MonoBehaviour
 
     void SetCurrentWeapon()
     {
+        weaponDamage = currentWeapon.damage;
         shootDelay = currentWeapon.shootDelay;
         reloadTime = currentWeapon.reloadTime;
         clipSize = currentWeapon.clipSize;
