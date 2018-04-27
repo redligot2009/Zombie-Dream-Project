@@ -7,7 +7,10 @@ public class Health : MonoBehaviour {
     public float health = 3;
     public bool dead = false;
     public float hitTimer = 0;
+    public float healTimer = 0;
+    public float healTimerDelay = 0.1f;
     public float hitTimerDelay = 1f;
+    public float origHealth = 0;
 
     private void Start()
     {
@@ -16,11 +19,25 @@ public class Health : MonoBehaviour {
 
     private void Update()
     {
-        if(hitTimer > 0)
+        origHealth = Mathf.Max(health, origHealth);
+        if(healTimer > 0)
+        {
+            healTimer -= Time.deltaTime;
+        }
+        if (hitTimer > 0)
         {
             hitTimer -= Time.deltaTime;
         }
         dead = health <= 0;
+    }
+
+    public void Heal(float healthRestore = 0)
+    {
+        if(healTimer <= 0)
+        {
+            healTimer = healTimerDelay;
+            health = Mathf.Min(health + healthRestore, origHealth);
+        }
     }
 
     public void Hurt(float damage = 1)

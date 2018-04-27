@@ -34,7 +34,7 @@ public class PlayerControls : MonoBehaviour
             foreach (var point in collision.contacts)
             {
                 Health enemyHealth = point.collider.transform.GetComponent<Health>();
-                if (point.collider.GetComponent<BoxCollider2D>().bounds.max.y < po.raycastOrigins.bottomLeft.y)
+                if (point.collider.GetComponent<BoxCollider2D>().bounds.max.y - 0.25f < po.raycastOrigins.bottomLeft.y)
                 {
                     if (!enemyHealth.dead)
                     {
@@ -52,7 +52,7 @@ public class PlayerControls : MonoBehaviour
         if(collision.gameObject.layer == LayerMask.NameToLayer("enemy"))
         {
             Health enemyHealth = collision.transform.GetComponent<Health>();
-            if (collision.collider.GetComponent<BoxCollider2D>().bounds.max.y >= po.raycastOrigins.bottomLeft.y-0.15f)
+            if (collision.collider.GetComponent<BoxCollider2D>().bounds.max.y >= po.raycastOrigins.bottomLeft.y-0.25f)
             {
                 if (!enemyHealth.dead)
                 {

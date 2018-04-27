@@ -56,7 +56,7 @@ public class HealthUI : MonoBehaviour {
     {
         if (!health.dead)
         {
-            if (health.hitTimer > 0)
+            if (health.hitTimer > 0||health.healTimer > 0)
             {
                 for (int i = 0; i < hearts.Count; i++)
                 {
