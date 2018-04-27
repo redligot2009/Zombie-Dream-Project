@@ -115,7 +115,7 @@ public class PlayerControls : MonoBehaviour
         if(!audioSource.isPlaying && currentWeapon.loopShot || !currentWeapon.loopShot) audioSource.Play();
     }
 
-    void SetCurrentWeapon()
+    public void SetCurrentWeapon()
     {
         weaponDamage = currentWeapon.damage;
         shootDelay = currentWeapon.shootDelay;

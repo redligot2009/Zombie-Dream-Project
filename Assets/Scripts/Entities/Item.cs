@@ -37,6 +37,7 @@ public class Item : MonoBehaviour {
                     case ItemObject.ItemType.ITEM_PICKUP:
                         //player.currentWeapon = itemStats.associatedWeapon;
                         GameManager.currentWeapon = itemStats.associatedWeapon;
+                        player.currBullet = 1;
                         break;
                 }
                 Destroy(transform.gameObject);
