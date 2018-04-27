@@ -86,7 +86,7 @@ public class PlayerControls : MonoBehaviour
     [HideInInspector]
     public bool jump = false, attack = false, jumprelease = false;
     [HideInInspector]
-    public bool shoot = false, shootDown = false, reload = false;
+    public bool shoot = false, shootDown = false, shootUp = false, reload = false;
     
     public int facing = 1;
 
@@ -112,7 +112,7 @@ public class PlayerControls : MonoBehaviour
         currBullet++;
         po.velocity.x -= facing * weaponRecoil * (Mathf.Abs(po.velocity.x) > 2f ? 0.5f : 1);
         camShake.ShakeCamera(currentWeapon.cameraShakeIntensity, 0.05f);
-        audioSource.Play();
+        if(!audioSource.isPlaying && currentWeapon.loopShot || !currentWeapon.loopShot) audioSource.Play();
     }
 
     void SetCurrentWeapon()
@@ -123,6 +123,7 @@ public class PlayerControls : MonoBehaviour
         clipSize = currentWeapon.clipSize;
         weaponRecoil = currentWeapon.recoilVelocity;
         audioSource.clip = currentWeapon.shotSound;
+        if (currentWeapon.loopShot) audioSource.loop = true;
     }
 
     void Update()
@@ -136,6 +137,7 @@ public class PlayerControls : MonoBehaviour
         down = /*Input.GetKey(KeyCode.S) ||*/ Input.GetKey(KeyCode.DownArrow);
         shoot = Input.GetKeyDown(KeyCode.X);
         shootDown = Input.GetKey(KeyCode.X);
+        shootUp = Input.GetKeyUp(KeyCode.X);
         reload = Input.GetKey(KeyCode.R);
         if (!health.dead)
         {
@@ -190,12 +192,20 @@ public class PlayerControls : MonoBehaviour
             }
             if (armed)
             {
-                if ((shoot&&currentWeapon.triggerType == WeaponObject.TriggerType.MANUAL || 
-                    shootDown && currentWeapon.triggerType == WeaponObject.TriggerType.AUTOMATIC) 
+                if ((shoot && currentWeapon.triggerType == WeaponObject.TriggerType.MANUAL ||
+                    shootDown && currentWeapon.triggerType == WeaponObject.TriggerType.AUTOMATIC)
                     && shootTimer <= 0 && reloadTimer <= 0)
                 {
                     shootTimer = shootDelay;
+                    //audioSource.clip = currentWeapon.releaseSound;
+                    audioSource.volume = 1;
                     Shoot();
+                }
+                if (!shootDown && currentWeapon.triggerType == WeaponObject.TriggerType.AUTOMATIC || reloadTimer > 0)
+                {
+                    audioSource.volume = Mathf.Lerp(audioSource.volume,0,Time.deltaTime*10f);
+                    //audioSource.clip = currentWeapon.releaseSound;
+                    //audioSource.PlayOneShot(currentWeapon.releaseSound);
                 }
             }
 

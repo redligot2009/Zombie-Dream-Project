@@ -19,4 +19,5 @@ MonoBehaviour:
   recoilVelocity: 0
   cameraShakeIntensity: 0
   triggerType: 0
-  shotSound: {fileID: 8300000, guid: 6322b49f486809444b35069e202a2bbe, type: 3}
+  shotSound: {fileID: 8300000, guid: 80331e87fcba4924bb6a35ca5f69bb3a, type: 3}
+  loopShot: 0

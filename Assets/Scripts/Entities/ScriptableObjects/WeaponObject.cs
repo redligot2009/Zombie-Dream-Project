@@ -16,4 +16,5 @@ public class WeaponObject : ScriptableObject
     public float cameraShakeIntensity = 0f;
     public TriggerType triggerType;
     public AudioClip shotSound;
+    public bool loopShot = false;
 }
