@@ -19,12 +19,15 @@ public class PlayerControls : MonoBehaviour
 
     CameraShake camShake;
 
+    public AudioSource audioSource;
+
     void Start()
     {
         playerAnimation = GetComponent<PlayerAnimation>();
         po = GetComponent<PhysicsObject>();
         health = GetComponent<Health>();
         camShake = Camera.main.transform.GetComponent<CameraShake>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -109,6 +112,7 @@ public class PlayerControls : MonoBehaviour
         currBullet++;
         po.velocity.x -= facing * weaponRecoil * (Mathf.Abs(po.velocity.x) > 2f ? 0.5f : 1);
         camShake.ShakeCamera(currentWeapon.cameraShakeIntensity, 0.05f);
+        audioSource.Play();
     }
 
     void SetCurrentWeapon()
@@ -118,6 +122,7 @@ public class PlayerControls : MonoBehaviour
         reloadTime = currentWeapon.reloadTime;
         clipSize = currentWeapon.clipSize;
         weaponRecoil = currentWeapon.recoilVelocity;
+        audioSource.clip = currentWeapon.shotSound;
     }
 
     void Update()

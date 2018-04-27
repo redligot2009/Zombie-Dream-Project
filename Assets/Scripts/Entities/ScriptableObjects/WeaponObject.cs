@@ -15,4 +15,5 @@ public class WeaponObject : ScriptableObject
     public float recoilVelocity = 0f;
     public float cameraShakeIntensity = 0f;
     public TriggerType triggerType;
+    public AudioClip shotSound;
 }

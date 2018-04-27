@@ -16,3 +16,7 @@ MonoBehaviour:
   shootDelay: 0.125
   reloadTime: 2.5
   clipSize: 35
+  recoilVelocity: 0
+  cameraShakeIntensity: 0
+  triggerType: 0
+  shotSound: {fileID: 8300000, guid: 6322b49f486809444b35069e202a2bbe, type: 3}
