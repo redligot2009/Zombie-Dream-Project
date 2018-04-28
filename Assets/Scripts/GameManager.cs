@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour {
     public AudioSource music;
     public AudioClip deathTheme;
     public AudioClip bgTheme;
-    public bool playDead = true;
 
     void Start ()
     {
@@ -82,24 +81,21 @@ public class GameManager : MonoBehaviour {
         }
         if(isDead)
         {
-            if (!playDead)
+            if (music.clip != deathTheme)
             {
                 music.clip = deathTheme;
                 music.loop = false;
                 music.Play();
-                playDead = true;
             }
             ShowDeadMenu();
         }
         else
         {
-            if(playDead)
+            if(music.clip != bgTheme)
             {
-                Debug.Log("YO");
                 music.clip = bgTheme;
                 music.loop = true;
                 music.Play();
-                playDead = false;
             }
             if(player.currentWeapon != currentWeapon)
                 player.currentWeapon = currentWeapon;
@@ -109,6 +105,10 @@ public class GameManager : MonoBehaviour {
             if (Input.GetKey(KeyCode.R))
             {
                 Restart();
+            }
+            if (Input.GetKey(KeyCode.M))
+            {
+                LoadMenu();
             }
         }
     }

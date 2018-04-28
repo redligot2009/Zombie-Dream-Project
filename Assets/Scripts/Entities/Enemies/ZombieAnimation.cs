@@ -9,6 +9,8 @@ public class ZombieAnimation : MonoBehaviour {
     PhysicsObject po;
     GoombaAI goombaAI;
     Health health;
+    AudioSource zombieSoundSource;
+    public AudioClip groanSound, hurtSound;
 
 	void Start () {
         po = GetComponent<PhysicsObject>();
@@ -16,6 +18,7 @@ public class ZombieAnimation : MonoBehaviour {
         health = GetComponent<Health>();
         anim = transform.Find("anim").GetComponent<UnityArmatureComponent>();
         anim.animation.FadeIn("run", 0.1f);
+        zombieSoundSource = transform.Find("zombieSound").GetComponent<AudioSource>();
 	}
 	
 	void Update () {
@@ -29,6 +32,12 @@ public class ZombieAnimation : MonoBehaviour {
         }
         if (health.dead)
         {
+            if (zombieSoundSource.clip != hurtSound)
+            {
+                zombieSoundSource.Stop();
+                zombieSoundSource.clip = hurtSound;
+                zombieSoundSource.Play();
+            }
             if (anim.animation.GetState("death") == null)
                 anim.animation.FadeIn("death", 0.1f, 1);
         }
@@ -36,6 +45,12 @@ public class ZombieAnimation : MonoBehaviour {
         {
             if (health.hitTimer > 0)
             {
+                if (zombieSoundSource.clip != hurtSound)
+                {
+                    zombieSoundSource.Stop();
+                    zombieSoundSource.clip = hurtSound;
+                    zombieSoundSource.Play();
+                }
                 if (anim.animation.GetState("hurt") == null)
                 {
                     anim.animation.FadeIn("hurt", 0.1f, 1);
@@ -43,6 +58,14 @@ public class ZombieAnimation : MonoBehaviour {
             }
             else
             {
+                if(!zombieSoundSource.isPlaying)
+                {
+                    if (zombieSoundSource.clip != groanSound)
+                    {
+                        zombieSoundSource.clip = groanSound;
+                    }
+                    zombieSoundSource.PlayDelayed(5f);
+                }
                 if (anim.animation.GetState("run") == null)
                 {
                     anim.animation.FadeIn("run", 0.25f, -1);

@@ -344,7 +344,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3a6b2e170b52a0f43beceef476018ab2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.31
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -406,7 +406,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 1
+      value: 0.75
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -429,7 +429,6 @@ MonoBehaviour:
   music: {fileID: 0}
   deathTheme: {fileID: 8300000, guid: 3a6b2e170b52a0f43beceef476018ab2, type: 3}
   bgTheme: {fileID: 8300000, guid: c5ee90ebf01248048ba8005b6362be91, type: 3}
-  playDead: 1
 --- !u!114 &114042468949231426
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2167,7 +2167,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 47a10a7aa413b7849b0c4fb4230aff83, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.33
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2328,7 +2328,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.78
+  m_Volume: 0.86
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2430,7 +2430,7 @@ MonoBehaviour:
   hitTimer: 0
   healTimer: 0
   healTimerDelay: 0.1
-  hitTimerDelay: 1
+  hitTimerDelay: 1.5
   origHealth: 0
 --- !u!114 &114578636480915982
 MonoBehaviour:
