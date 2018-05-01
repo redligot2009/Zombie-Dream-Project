@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+[ExecuteInEditMode]
 public class Cutscene : MonoBehaviour {
 
     public List<Sprite> frames;
     public int curr = 0;
     Image image;
+    public bool autoplay = false;
 
     public string nextScene = "";
 
@@ -53,13 +54,13 @@ public class Cutscene : MonoBehaviour {
         finished = true;
     }
 
-    public void NextFrame()
+    public void NextFrame(float duration = 1)
     {
-        StartCoroutine(Wait(1,true));
+        StartCoroutine(Wait(duration,true));
     }
-    public void PrevFrame()
+    public void PrevFrame(float duration = 1)
     {
-        StartCoroutine(Wait(1, false));
+        StartCoroutine(Wait(duration, false));
     }
 
     void Start () {
@@ -68,13 +69,26 @@ public class Cutscene : MonoBehaviour {
 	
 	void Update () {
         //control frames
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && finished)
+        if (!autoplay)
         {
-            PrevFrame();
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && finished)
+            {
+                PrevFrame();
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow) && finished)
+            {
+                NextFrame();
+            }
         }
-        if(Input.GetKeyDown(KeyCode.RightArrow) && finished)
+        else
         {
-            NextFrame();
+            if (Application.isPlaying)
+            {
+                if (finished)
+                {
+                    NextFrame(2);
+                }
+            }
         }
         if (frames.Count > 0)
         {

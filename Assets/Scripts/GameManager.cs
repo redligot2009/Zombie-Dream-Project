@@ -111,5 +111,12 @@ public class GameManager : MonoBehaviour {
                 LoadMenu();
             }
         }
+
+        if (GamePaused) music.Pause();
+        else
+        {
+            if(!music.isPlaying)
+                music.Play();
+        }
     }
 }
