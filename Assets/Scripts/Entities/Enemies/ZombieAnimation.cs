@@ -64,7 +64,7 @@ public class ZombieAnimation : MonoBehaviour {
                     {
                         zombieSoundSource.clip = groanSound;
                     }
-                    zombieSoundSource.PlayDelayed(5f);
+                    zombieSoundSource.PlayDelayed(5f * Random.Range(1f,2f));
                 }
                 if (anim.animation.GetState("run") == null)
                 {
