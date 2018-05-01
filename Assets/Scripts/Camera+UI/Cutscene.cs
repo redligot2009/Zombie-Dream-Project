@@ -10,6 +10,7 @@ public class Cutscene : MonoBehaviour {
     public int curr = 0;
     Image image;
     public bool autoplay = false;
+    public bool fadeTransition = true;
 
     public string nextScene = "";
 
@@ -34,10 +35,12 @@ public class Cutscene : MonoBehaviour {
         finished = false;
         if (newFrame != curr)
         {
-            StartCoroutine(Fade(seconds / 2, 0));
+            if(fadeTransition)
+                StartCoroutine(Fade(seconds / 2, 0));
             yield return new WaitForSeconds(seconds / 2);
             curr = newFrame;
-            StartCoroutine(Fade(seconds / 2, 1));
+            if(fadeTransition)
+                StartCoroutine(Fade(seconds / 2, 1));
             yield return new WaitForSeconds(seconds / 2);
         }
         else

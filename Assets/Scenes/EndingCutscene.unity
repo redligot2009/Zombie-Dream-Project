@@ -449,6 +449,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0dde30bb7f640af4a9112eac42c47236, type: 3}
   curr: 0
   autoplay: 1
+  fadeTransition: 0
   nextScene: Menu
   finished: 1
 --- !u!212 &1276855295
