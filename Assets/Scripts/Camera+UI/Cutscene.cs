@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-[ExecuteInEditMode]
 public class Cutscene : MonoBehaviour {
 
     public List<Sprite> frames;
@@ -27,7 +26,7 @@ public class Cutscene : MonoBehaviour {
             yield return null;
         }
     }
-    bool finished = true;
+    public bool finished = true;
     IEnumerator Wait(float seconds = 0, bool next = true)
     {
         int newFrame = (next ? Mathf.Min(curr + 1, frames.Count - 1) : Mathf.Max(curr - 1, 0));
