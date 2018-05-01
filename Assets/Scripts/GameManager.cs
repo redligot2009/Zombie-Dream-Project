@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     public static bool isDead = false;
     public static WeaponObject currentWeapon;
 
-    public GameObject pauseMenuUI, deadMenuUI;
+    public GameObject pauseMenuUI, deadMenuUI, optionsMenuUI;
 
     PlayerControls player;
 
@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
 
     void Start ()
     {
+        optionsMenuUI.SetActive(false);
         music = transform.Find("musicSource").GetComponent<AudioSource>();
         GamePaused = false;
         isDead = false;
@@ -67,6 +68,19 @@ public class GameManager : MonoBehaviour {
         GamePaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void ShowOptions()
+    {
+        pauseMenuUI.SetActive(false);
+        optionsMenuUI.SetActive(true);
+    }
+
+    public void hideOptions()
+    {
+        pauseMenuUI.SetActive(true);
+        optionsMenuUI.SetActive(false);
+    }
+
     void Update () {
         if (Input.GetKeyDown(KeyCode.Escape) && !isDead)
         {
@@ -115,7 +129,7 @@ public class GameManager : MonoBehaviour {
         if (GamePaused) music.Pause();
         else
         {
-            if(!music.isPlaying)
+            if(!music.isPlaying && !isDead)
                 music.Play();
         }
     }
