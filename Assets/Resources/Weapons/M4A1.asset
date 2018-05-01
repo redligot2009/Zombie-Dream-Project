@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: M4A1
   m_EditorClassIdentifier: 
   weaponName: M4A1
-  damage: 0.25
+  damage: 0.5
   shootDelay: 0.13
   reloadTime: 2.5
   clipSize: 30
