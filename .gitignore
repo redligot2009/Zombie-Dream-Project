@@ -42,3 +42,5 @@ sysinfo.txt
 *.ide
 *.ide
 .vs/Nat-Red-Fusion/v15/.suo
+.vs/Nat-Red-Fusion/v15/.suo
+*.ide
